@@ -1,18 +1,39 @@
 /* =====================================================
    AERO ALUMNI CONNECT
-   Frontend JavaScript
+   FRONTEND JAVASCRIPT
+
+   Department of Aerospace Engineering
+   School of Mechanical Engineering (SMEC)
+   VIT Bhopal University
    ===================================================== */
 
 
+/* =====================================================
+   GOOGLE APPS SCRIPT BACKEND
+   ===================================================== */
+
 /*
- * Mobile navigation
+ * IMPORTANT:
+ *
+ * Replace the URL below with your actual
+ * Google Apps Script Web App URL.
+ *
+ * The URL must end with /exec
  */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbywtAgQ05-QIByYCgaQS1cn0PtCXRGKGIAO6AZP2oeVhPNLetWbsQxHIazbK5V0gEgEdg/exec";
+
+
+/* =====================================================
+   MOBILE NAVIGATION
+   ===================================================== */
 
 const menuButton =
     document.getElementById("menuButton");
 
 const navigation =
-    document.querySelector(".main-navigation");
+    document.getElementById("mainNavigation");
 
 
 if (menuButton && navigation) {
@@ -21,7 +42,13 @@ if (menuButton && navigation) {
         "click",
         function () {
 
-            navigation.classList.toggle("active");
+            const isActive =
+                navigation.classList.toggle("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                isActive ? "true" : "false"
+            );
 
         }
     );
@@ -29,9 +56,9 @@ if (menuButton && navigation) {
 }
 
 
-/*
- * Close mobile menu after clicking a link
- */
+/* =====================================================
+   CLOSE MOBILE MENU AFTER CLICKING LINK
+   ===================================================== */
 
 const navigationLinks =
     document.querySelectorAll(
@@ -51,15 +78,24 @@ navigationLinks.forEach(function (link) {
 
             }
 
+            if (menuButton) {
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
         }
     );
 
 });
 
 
-/*
- * Current year in footer
- */
+/* =====================================================
+   CURRENT YEAR
+   ===================================================== */
 
 const yearElement =
     document.getElementById("currentYear");
@@ -71,3 +107,118 @@ if (yearElement) {
         new Date().getFullYear();
 
 }
+
+
+/* =====================================================
+   BACKEND CONNECTION TEST
+   ===================================================== */
+
+/**
+ * Tests communication between:
+ *
+ * GitHub Pages
+ *       ↓
+ * Google Apps Script
+ *       ↓
+ * Google Sheets
+ *
+ * This function will be used only during
+ * Step 6 testing.
+ */
+
+async function testBackendConnection() {
+
+    if (
+        !API_URL ||
+        API_URL ===
+        "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"
+    ) {
+
+        console.error(
+            "Google Apps Script Web App URL has not been configured."
+        );
+
+        return {
+            success: false,
+            message:
+                "Backend URL is not configured."
+        };
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?action=health",
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "HTTP error: " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Aero Alumni Connect Backend Response:",
+            data
+        );
+
+
+        if (data.success) {
+
+            console.log(
+                "✓ Backend connection successful."
+            );
+
+        } else {
+
+            console.warn(
+                "Backend responded, but reported an error.",
+                data
+            );
+
+        }
+
+
+        return data;
+
+
+    } catch (error) {
+
+        console.error(
+            "Backend connection failed:",
+            error
+        );
+
+
+        return {
+            success: false,
+            message: error.message
+        };
+
+    }
+
+}
+
+
+/* =====================================================
+   RUN BACKEND CONNECTION TEST
+   ===================================================== */
+
+testBackendConnection();
