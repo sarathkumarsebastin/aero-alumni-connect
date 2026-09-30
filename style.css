@@ -1,0 +1,852 @@
+/* =====================================================
+   AERO ALUMNI CONNECT
+   VIT BHOPAL UNIVERSITY
+   Main stylesheet
+   ===================================================== */
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    line-height: 1.6;
+
+    color: #172033;
+
+    background: #ffffff;
+
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background: rgba(255,255,255,0.97);
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+
+.header-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 12px 24px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.university-logo {
+
+    width: 150px;
+
+    height: auto;
+
+    max-height: 65px;
+
+    object-fit: contain;
+
+}
+
+
+.brand-text {
+
+    border-left: 1px solid #d8dce3;
+
+    padding-left: 14px;
+
+}
+
+
+.university-name {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.department-name {
+
+    font-size: 13px;
+
+    color: #596273;
+
+    margin-top: 2px;
+
+}
+
+
+.main-navigation {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+}
+
+
+.main-navigation a {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+    transition: 0.2s;
+
+}
+
+
+.main-navigation a:hover {
+
+    color: #164e8a;
+
+}
+
+
+.menu-button {
+
+    display: none;
+
+    border: none;
+
+    background: none;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.hero-section {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f8fc 0%,
+            #ffffff 55%,
+            #eef4fa 100%
+        );
+
+    padding: 90px 24px;
+
+}
+
+
+.hero-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1.6fr
+        0.9fr;
+
+    gap: 60px;
+
+    align-items: center;
+
+}
+
+
+.hero-label,
+.section-label {
+
+    display: inline-block;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: #164e8a;
+
+    margin-bottom: 12px;
+
+}
+
+
+.hero-content h1 {
+
+    font-size:
+        clamp(42px, 6vw, 72px);
+
+    line-height: 1.05;
+
+    margin-bottom: 20px;
+
+    color: #111827;
+
+}
+
+
+.hero-tagline {
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+    margin-bottom: 20px;
+
+}
+
+
+.hero-description {
+
+    max-width: 680px;
+
+    font-size: 17px;
+
+    color: #667085;
+
+    margin-bottom: 30px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+}
+
+
+.button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 13px 22px;
+
+    border-radius: 7px;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.button-primary {
+
+    background: #164e8a;
+
+    color: white;
+
+}
+
+
+.button-primary:hover {
+
+    background: #0f3c6b;
+
+}
+
+
+.button-secondary {
+
+    border: 1px solid #cbd5e1;
+
+    background: white;
+
+}
+
+
+.button-secondary:hover {
+
+    background: #f8fafc;
+
+}
+
+
+.hero-card {
+
+    padding: 40px;
+
+    background: white;
+
+    border: 1px solid #e3e8ef;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 45px rgba(15, 23, 42, 0.08);
+
+}
+
+
+.aircraft-symbol {
+
+    font-size: 55px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.hero-card h2 {
+
+    font-size: 28px;
+
+    line-height: 1.2;
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero-card p {
+
+    color: #667085;
+
+}
+
+
+/* =====================================================
+   GENERAL SECTIONS
+   ===================================================== */
+
+.section {
+
+    padding: 90px 24px;
+
+}
+
+
+.section-light {
+
+    background: #f7f9fc;
+
+}
+
+
+.section-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+}
+
+
+.section-heading {
+
+    max-width: 760px;
+
+    margin-bottom: 45px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size:
+        clamp(30px, 4vw, 44px);
+
+    line-height: 1.15;
+
+    margin-bottom: 16px;
+
+}
+
+
+.section-heading p {
+
+    color: #667085;
+
+    font-size: 16px;
+
+}
+
+
+/* =====================================================
+   FEATURES
+   ===================================================== */
+
+.feature-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.feature-card {
+
+    padding: 28px;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    background: white;
+
+    transition: transform 0.2s,
+                box-shadow 0.2s;
+
+}
+
+
+.feature-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 30px
+        rgba(15, 23, 42, 0.08);
+
+}
+
+
+.feature-icon {
+
+    font-size: 30px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.feature-card h3 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.feature-card p {
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   CONNECT
+   ===================================================== */
+
+.connect-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.connect-item {
+
+    background: white;
+
+    padding: 28px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+
+}
+
+
+.connect-item span {
+
+    display: block;
+
+    font-size: 30px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.connect-item h3 {
+
+    margin-bottom: 8px;
+
+}
+
+
+.connect-item p {
+
+    color: #667085;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   ACTIVITIES
+   ===================================================== */
+
+.activity-placeholder {
+
+    border: 1px dashed #b8c3d1;
+
+    border-radius: 14px;
+
+    padding: 60px 30px;
+
+    text-align: center;
+
+    background: #fafbfc;
+
+}
+
+
+.activity-icon {
+
+    font-size: 42px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.activity-placeholder h3 {
+
+    margin-bottom: 10px;
+
+}
+
+
+.activity-placeholder p {
+
+    color: #667085;
+
+}
+
+
+/* =====================================================
+   CTA
+   ===================================================== */
+
+.cta-section {
+
+    padding: 85px 24px;
+
+    background: #164e8a;
+
+    color: white;
+
+    text-align: center;
+
+}
+
+
+.cta-container {
+
+    max-width: 800px;
+
+    margin: auto;
+
+}
+
+
+.cta-container h2 {
+
+    font-size: 42px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.cta-container p {
+
+    font-size: 17px;
+
+    opacity: 0.9;
+
+    margin-bottom: 25px;
+
+}
+
+
+.button-light {
+
+    background: white;
+
+    color: #164e8a;
+
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+.site-footer {
+
+    background: #101828;
+
+    color: white;
+
+    padding: 35px 24px;
+
+}
+
+
+.footer-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.site-footer p {
+
+    color: #b8c2d1;
+
+    font-size: 13px;
+
+    margin-top: 6px;
+
+}
+
+
+.footer-right {
+
+    text-align: right;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE DESIGN
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .main-navigation {
+
+        display: none;
+
+        position: absolute;
+
+        top: 100%;
+
+        left: 0;
+
+        right: 0;
+
+        background: white;
+
+        padding: 20px 24px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        border-bottom: 1px solid #e5e7eb;
+
+    }
+
+
+    .main-navigation.active {
+
+        display: flex;
+
+    }
+
+
+    .menu-button {
+
+        display: block;
+
+    }
+
+
+    .hero-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .feature-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .connect-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .header-container {
+
+        padding: 10px 16px;
+
+    }
+
+
+    .university-logo {
+
+        width: 120px;
+
+    }
+
+
+    .brand-text {
+
+        display: none;
+
+    }
+
+
+    .hero-section {
+
+        padding: 65px 18px;
+
+    }
+
+
+    .section {
+
+        padding: 65px 18px;
+
+    }
+
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .button {
+
+        width: 100%;
+
+    }
+
+
+    .feature-grid,
+    .connect-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .footer-container {
+
+        flex-direction: column;
+
+    }
+
+
+    .footer-right {
+
+        text-align: left;
+
+    }
+
+}
