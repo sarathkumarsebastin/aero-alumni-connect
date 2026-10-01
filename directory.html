@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Alumni Directory | Aero Alumni Connect
+    </title>
+
+    <meta
+        name="description"
+        content="Public alumni directory of the Department of Aerospace Engineering, VIT Bhopal University."
+    >
+
+
+    <style>
+
+        /* =================================================
+           RESET
+           ================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f7fb;
+
+            color: #1d2939;
+
+            line-height: 1.6;
+
+        }
+
+
+        /* =================================================
+           HEADER
+           ================================================= */
+
+        .directory-header {
+
+            background: #123b5d;
+
+            color: white;
+
+            padding: 15px 25px;
+
+        }
+
+
+        .directory-header-inner {
+
+            max-width: 1150px;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+        }
+
+
+        .directory-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            text-decoration: none;
+
+            color: white;
+
+        }
+
+
+        .directory-logo {
+
+            width: 100px;
+
+            height: 70px;
+
+            background: #123b5d;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 6px;
+
+        }
+
+
+        .directory-logo img {
+
+            max-width: 95px;
+
+            max-height: 65px;
+
+            width: auto;
+
+            height: auto;
+
+            display: block;
+
+        }
+
+
+        .directory-brand-text {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 2px;
+
+        }
+
+
+        .directory-department {
+
+            font-size: 1.05rem;
+
+            font-weight: 700;
+
+        }
+
+
+        .directory-school {
+
+            font-size: 0.92rem;
+
+        }
+
+
+        .directory-university {
+
+            font-size: 0.88rem;
+
+            opacity: 0.9;
+
+        }
+
+
+        /* =================================================
+           BACK BUTTON
+           ================================================= */
+
+        .back-button {
+
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            border: 1px solid
+                rgba(255,255,255,0.5);
+
+            border-radius: 7px;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+
+        }
+
+
+        .back-button:hover {
+
+            background:
+                rgba(255,255,255,0.12);
+
+        }
+
+
+        /* =================================================
+           MAIN
+           ================================================= */
+
+        .directory-main {
+
+            padding: 55px 20px 70px;
+
+        }
+
+
+        .directory-wrapper {
+
+            max-width: 1150px;
+
+            margin: 0 auto;
+
+        }
+
+
+        /* =================================================
+           TITLE
+           ================================================= */
+
+        .directory-title {
+
+            text-align: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .directory-title .kicker {
+
+            margin: 0 0 8px;
+
+            color: #1769aa;
+
+            font-size: 0.85rem;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+        }
+
+
+        .directory-title h1 {
+
+            margin: 0 0 12px;
+
+            color: #123b5d;
+
+            font-size: 2.5rem;
+
+        }
+
+
+        .directory-title p {
+
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            color: #52606d;
+
+        }
+
+
+        /* =================================================
+           SEARCH AREA
+           ================================================= */
+
+        .directory-controls {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 25px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 28px
+                rgba(0,0,0,0.07);
+
+        }
+
+
+        .control-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                2fr 1fr auto;
+
+            gap: 15px;
+
+            align-items: end;
+
+        }
+
+
+        .control-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .control-group label {
+
+            margin-bottom: 7px;
+
+            font-weight: 600;
+
+            color: #344054;
+
+        }
+
+
+        .control-group input,
+        .control-group select {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #cbd5df;
+
+            border-radius: 7px;
+
+            background: white;
+
+            font-family: inherit;
+
+            font-size: 0.95rem;
+
+        }
+
+
+        .control-group input:focus,
+        .control-group select:focus {
+
+            outline: none;
+
+            border-color: #1769aa;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23,105,170,0.12);
+
+        }
+
+
+        .search-button {
+
+            padding: 12px 22px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #1769aa;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        .search-button:hover {
+
+            background: #125789;
+
+        }
+
+
+        /* =================================================
+           DIRECTORY STATUS
+           ================================================= */
+
+        .directory-status {
+
+            margin-bottom: 20px;
+
+            color: #52606d;
+
+            font-size: 0.95rem;
+
+        }
+
+
+        .directory-message {
+
+            display: none;
+
+            padding: 18px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .directory-message.error {
+
+            display: block;
+
+            background: #fff0f0;
+
+            border: 1px solid #e2aaaa;
+
+            color: #8a1c1c;
+
+        }
+
+
+        .directory-message.info {
+
+            display: block;
+
+            background: #eaf4ff;
+
+            border: 1px solid #b8d7f0;
+
+            color: #164c70;
+
+        }
+
+
+        /* =================================================
+           ALUMNI GRID
+           ================================================= */
+
+        .alumni-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 22px;
+
+        }
+
+
+        /* =================================================
+           ALUMNI CARD
+           ================================================= */
+
+        .alumni-card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 8px 28px
+                rgba(0,0,0,0.07);
+
+            border: 1px solid
+                #e4e7ec;
+
+        }
+
+
+        .alumni-card h2 {
+
+            margin: 0 0 7px;
+
+            color: #123b5d;
+
+            font-size: 1.25rem;
+
+        }
+
+
+        .alumni-degree {
+
+            color: #1769aa;
+
+            font-weight: 600;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .alumni-detail {
+
+            margin: 7px 0;
+
+            color: #52606d;
+
+        }
+
+
+        .alumni-detail strong {
+
+            color: #344054;
+
+        }
+
+
+        .alumni-expertise {
+
+            margin-top: 15px;
+
+            padding-top: 15px;
+
+            border-top: 1px solid
+                #eaecf0;
+
+        }
+
+
+        .alumni-expertise strong {
+
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #344054;
+
+        }
+
+
+        .linkedin-link {
+
+            display: inline-block;
+
+            margin-top: 16px;
+
+            padding: 8px 13px;
+
+            border-radius: 6px;
+
+            background: #eef6ff;
+
+            color: #1769aa;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+            font-size: 0.9rem;
+
+        }
+
+
+        .linkedin-link:hover {
+
+            background: #dceeff;
+
+        }
+
+
+        /* =================================================
+           LOADING
+           ================================================= */
+
+        .loading {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #667085;
+
+        }
+
+
+        .loading-spinner {
+
+            width: 35px;
+
+            height: 35px;
+
+            margin: 0 auto 15px;
+
+            border: 4px solid #d9e8f5;
+
+            border-top-color: #1769aa;
+
+            border-radius: 50%;
+
+            animation:
+                spin 0.9s linear infinite;
+
+        }
+
+
+        @keyframes spin {
+
+            to {
+
+                transform:
+                    rotate(360deg);
+
+            }
+
+        }
+
+
+        /* =================================================
+           EMPTY STATE
+           ================================================= */
+
+        .empty-state {
+
+            text-align: center;
+
+            padding: 50px 20px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            border: 1px solid #e4e7ec;
+
+        }
+
+
+        .empty-state h2 {
+
+            margin-top: 0;
+
+            color: #123b5d;
+
+        }
+
+
+        .empty-state p {
+
+            color: #667085;
+
+        }
+
+
+        /* =================================================
+           FOOTER
+           ================================================= */
+
+        .directory-footer {
+
+            background: #123b5d;
+
+            color: white;
+
+            padding: 25px 20px;
+
+            text-align: center;
+
+        }
+
+
+        .directory-footer p {
+
+            margin: 5px 0;
+
+        }
+
+
+        /* =================================================
+           MOBILE
+           ================================================= */
+
+        @media (max-width: 900px) {
+
+            .alumni-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+            }
+
+            .control-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+            .search-button {
+
+                grid-column: 1 / -1;
+
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .directory-header-inner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+            }
+
+            .directory-main {
+
+                padding:
+                    35px 12px 50px;
+
+            }
+
+            .directory-title h1 {
+
+                font-size: 2rem;
+
+            }
+
+            .control-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .search-button {
+
+                grid-column: auto;
+
+                width: 100%;
+
+            }
+
+            .alumni-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header class="directory-header">
+
+    <div class="directory-header-inner">
+
+
+        <a
+            href="index.html"
+            class="directory-brand"
+        >
+
+            <div class="directory-logo">
+
+                <img
+                    src="https://vitbhopal.ac.in/wp-content/uploads/2020/01/logochhota.png"
+                    alt="VIT Bhopal University logo"
+                >
+
+            </div>
+
+
+            <div class="directory-brand-text">
+
+                <div class="directory-department">
+                    Department of Aerospace Engineering
+                </div>
+
+                <div class="directory-school">
+                    School of Mechanical Engineering (SMEC)
+                </div>
+
+                <div class="directory-university">
+                    VIT Bhopal University
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="index.html#home"
+            class="back-button"
+        >
+            ← Back to Home
+        </a>
+
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+     ===================================================== -->
+
+<main class="directory-main">
+
+    <div class="directory-wrapper">
+
+
+        <!-- TITLE -->
+
+        <section class="directory-title">
+
+            <p class="kicker">
+                AERO ALUMNI CONNECT
+            </p>
+
+            <h1>
+                Alumni Directory
+            </h1>
+
+            <p>
+                Connect with alumni of the Department of
+                Aerospace Engineering, School of Mechanical
+                Engineering (SMEC), VIT Bhopal University.
+            </p>
+
+        </section>
+
+
+        <!-- SEARCH CONTROLS -->
+
+        <section class="directory-controls">
+
+            <div class="control-grid">
+
+
+                <div class="control-group">
+
+                    <label for="searchInput">
+                        Search Alumni
+                    </label>
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Name, organization, expertise, location..."
+                    >
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label for="yearFilter">
+                        Graduation Year
+                    </label>
+
+                    <select id="yearFilter">
+
+                        <option value="">
+                            All Years
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="searchButton"
+                    class="search-button"
+                >
+                    Search
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="directoryMessage"
+            class="directory-message"
+            role="status"
+            aria-live="polite"
+        ></div>
+
+
+        <!-- STATUS -->
+
+        <div
+            id="directoryStatus"
+            class="directory-status"
+        >
+            Loading alumni directory...
+        </div>
+
+
+        <!-- RESULTS -->
+
+        <section
+            id="alumniResults"
+            class="alumni-grid"
+        >
+
+            <div class="loading">
+
+                <div class="loading-spinner"></div>
+
+                Loading alumni profiles...
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="directory-footer">
+
+    <p>
+        <strong>
+            Aero Alumni Connect
+        </strong>
+    </p>
+
+    <p>
+        Department of Aerospace Engineering |
+        School of Mechanical Engineering (SMEC) |
+        VIT Bhopal University
+    </p>
+
+    <p>
+        © 2026 VIT Bhopal University
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script>
+
+    /* =================================================
+       GOOGLE APPS SCRIPT URL
+       ================================================= */
+
+    const API_URL =
+        "https://script.google.com/macros/s/AKFycbxgRk1wh2ei0o0evd2KYSXB1UGBFPkvZiqLSSxi5CYIaVo9pL-w_EIS0EB4q5KnVJRA/exec";
+
+
+    /* =================================================
+       ELEMENTS
+       ================================================= */
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const yearFilter =
+        document.getElementById(
+            "yearFilter"
+        );
+
+    const searchButton =
+        document.getElementById(
+            "searchButton"
+        );
+
+    const resultsContainer =
+        document.getElementById(
+            "alumniResults"
+        );
+
+    const statusElement =
+        document.getElementById(
+            "directoryStatus"
+        );
+
+    const messageElement =
+        document.getElementById(
+            "directoryMessage"
+        );
+
+
+    /* =================================================
+       MESSAGE
+       ================================================= */
+
+    function showMessage(
+        message,
+        type
+    ) {
+
+        messageElement.textContent =
+            message;
+
+        messageElement.className =
+            "directory-message " +
+            type;
+
+    }
+
+
+    function hideMessage() {
+
+        messageElement.textContent =
+            "";
+
+        messageElement.className =
+            "directory-message";
+
+    }
+
+
+    /* =================================================
+       ESCAPE HTML
+       ================================================= */
+
+    function escapeHtml(
+        value
+    ) {
+
+        return String(
+            value || ""
+        )
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+            .replace(
+                /</g,
+                "&lt;"
+            )
+            .replace(
+                />/g,
+                "&gt;"
+            )
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    /* =================================================
+       LOAD DIRECTORY
+       ================================================= */
+
+    async function loadDirectory() {
+
+        hideMessage();
+
+
+        resultsContainer.innerHTML = `
+
+            <div class="loading">
+
+                <div class="loading-spinner"></div>
+
+                Loading alumni profiles...
+
+            </div>
+
+        `;
+
+
+        statusElement.textContent =
+            "Loading alumni directory...";
+
+
+        try {
+
+            const search =
+                searchInput.value.trim();
+
+
+            const year =
+                yearFilter.value;
+
+
+            const url =
+                API_URL +
+                "?action=directory" +
+                "&q=" +
+                encodeURIComponent(
+                    search
+                ) +
+                "&year=" +
+                encodeURIComponent(
+                    year
+                );
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP error " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Alumni Directory API:",
+                data
+            );
+
+
+            if (!data.success) {
+
+                throw new Error(
+                    data.message ||
+                    "Directory API returned an error."
+                );
+
+            }
+
+
+            displayAlumni(
+                data.alumni || []
+            );
+
+
+        } catch (error) {
+
+            console.error(
+                "Directory loading failed:",
+                error
+            );
+
+
+            resultsContainer.innerHTML =
+                "";
+
+
+            statusElement.textContent =
+                "Unable to load the alumni directory.";
+
+
+            showMessage(
+                "The alumni directory could not be loaded. Please try again later.",
+                "error"
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       DISPLAY ALUMNI
+       ================================================= */
+
+    function displayAlumni(
+        alumni
+    ) {
+
+        resultsContainer.innerHTML =
+            "";
+
+
+        if (
+            !alumni ||
+            alumni.length === 0
+        ) {
+
+            statusElement.textContent =
+                "No public alumni profiles found.";
+
+
+            resultsContainer.innerHTML = `
+
+                <div class="empty-state">
+
+                    <h2>
+                        No Alumni Found
+                    </h2>
+
+                    <p>
+                        Try a different search term
+                        or graduation year.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        statusElement.textContent =
+            alumni.length +
+            (
+                alumni.length === 1
+                    ? " alumni profile found."
+                    : " alumni profiles found."
+            );
+
+
+        alumni.forEach(
+            function(person) {
+
+                const card =
+                    createAlumniCard(
+                        person
+                    );
+
+
+                resultsContainer.appendChild(
+                    card
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       CREATE ALUMNI CARD
+       ================================================= */
+
+    function createAlumniCard(
+        person
+    ) {
+
+        const card =
+            document.createElement(
+                "article"
+            );
+
+
+        card.className =
+            "alumni-card";
+
+
+        let html = "";
+
+
+        html += `
+
+            <h2>
+                ${escapeHtml(
+                    person.fullName
+                )}
+            </h2>
+
+        `;
+
+
+        if (
+            person.degree
+        ) {
+
+            html += `
+
+                <div class="alumni-degree">
+                    ${escapeHtml(
+                        person.degree
+                    )}
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.graduationYear
+        ) {
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Graduation:
+                    </strong>
+
+                    ${escapeHtml(
+                        person.graduationYear
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.organization
+        ) {
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Organization:
+                    </strong>
+
+                    ${escapeHtml(
+                        person.organization
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.designation
+        ) {
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Role:
+                    </strong>
+
+                    ${escapeHtml(
+                        person.designation
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.industrySector
+        ) {
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Industry:
+                    </strong>
+
+                    ${escapeHtml(
+                        person.industrySector
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.currentCity ||
+            person.currentCountry
+        ) {
+
+            const location =
+                [
+                    person.currentCity,
+                    person.currentCountry
+                ]
+                    .filter(Boolean)
+                    .join(", ");
+
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Location:
+                    </strong>
+
+                    ${escapeHtml(
+                        location
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.currentStatus
+        ) {
+
+            html += `
+
+                <div class="alumni-detail">
+
+                    <strong>
+                        Status:
+                    </strong>
+
+                    ${escapeHtml(
+                        person.currentStatus
+                    )}
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.technicalExpertise ||
+            person.higherStudies
+        ) {
+
+            html += `
+
+                <div class="alumni-expertise">
+
+            `;
+
+
+            if (
+                person.technicalExpertise
+            ) {
+
+                html += `
+
+                    <strong>
+                        Technical Expertise
+                    </strong>
+
+                    <div>
+                        ${escapeHtml(
+                            person.technicalExpertise
+                        )}
+                    </div>
+
+                `;
+
+            }
+
+
+            if (
+                person.higherStudies
+            ) {
+
+                html += `
+
+                    <div
+                        style="margin-top:10px;"
+                    >
+
+                        <strong>
+                            Higher Studies
+                        </strong>
+
+                        <div>
+                            ${escapeHtml(
+                                person.higherStudies
+                            )}
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+
+
+            html += `
+
+                </div>
+
+            `;
+
+        }
+
+
+        if (
+            person.linkedinUrl
+        ) {
+
+            let linkedinUrl =
+                String(
+                    person.linkedinUrl
+                ).trim();
+
+
+            if (
+                !/^https?:\/\//i.test(
+                    linkedinUrl
+                )
+            ) {
+
+                linkedinUrl =
+                    "https://" +
+                    linkedinUrl;
+
+            }
+
+
+            html += `
+
+                <a
+                    class="linkedin-link"
+                    href="${escapeHtml(
+                        linkedinUrl
+                    )}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View LinkedIn
+                </a>
+
+            `;
+
+        }
+
+
+        card.innerHTML =
+            html;
+
+
+        return card;
+
+    }
+
+
+    /* =================================================
+       POPULATE YEAR FILTER
+       ================================================= */
+
+    async function loadYears() {
+
+        try {
+
+            const response =
+                await fetch(
+                    API_URL +
+                    "?action=directory",
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !data.success ||
+                !Array.isArray(
+                    data.alumni
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            const years =
+                [
+                    ...new Set(
+                        data.alumni
+                            .map(
+                                function(person) {
+
+                                    return String(
+                                        person.graduationYear ||
+                                        ""
+                                    );
+
+                                }
+                            )
+                            .filter(Boolean)
+                    )
+                ]
+                    .sort(
+                        function(a, b) {
+
+                            return Number(b) -
+                                Number(a);
+
+                        }
+                    );
+
+
+            years.forEach(
+                function(year) {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        year;
+
+
+                    option.textContent =
+                        year;
+
+
+                    yearFilter.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            console.warn(
+                "Unable to populate year filter:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =================================================
+       EVENTS
+       ================================================= */
+
+    searchButton.addEventListener(
+        "click",
+        loadDirectory
+    );
+
+
+    yearFilter.addEventListener(
+        "change",
+        loadDirectory
+    );
+
+
+    searchInput.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                loadDirectory();
+
+            }
+
+        }
+    );
+
+
+    /* =================================================
+       START
+       ================================================= */
+
+    loadYears();
+
+    loadDirectory();
+
+</script>
+
+
+</body>
+
+</html>
