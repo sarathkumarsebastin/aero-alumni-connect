@@ -124,17 +124,30 @@ function initRegistrationForm() {
   window.addEventListener(
     'message',
     function(event) {
-      if (
-        AAC_CONFIG.backendMessageOrigins
-          .indexOf(event.origin) === -1
-      ) {
-        return;
-      }
-
+      // The registration response comes from the hidden Apps Script iframe.
+      // Apps Script HTML Service uses an iframe sandbox, and some browsers
+      // can report a different/opaque origin for the sandboxed response.
+      // The stronger check here is event.source === the exact iframe window.
+      // We therefore do NOT reject the message solely because event.origin
+      // differs from the expected Apps Script origins.
       if (
         frame &&
         event.source !== frame.contentWindow
       ) {
+        return;
+      }
+
+      // If an origin is available, accept known Apps Script origins.
+      // If the browser reports an opaque/null origin, the iframe-source
+      // check above is still the trust boundary.
+      var knownOrigin =
+        AAC_CONFIG.backendMessageOrigins.indexOf(event.origin) !== -1;
+
+      var opaqueOrigin =
+        event.origin === 'null' ||
+        event.origin === '';
+
+      if (!knownOrigin && !opaqueOrigin) {
         return;
       }
 
@@ -235,11 +248,11 @@ function initRegistrationForm() {
           showStatus(
             statusBox,
             'error',
-            'The registration server did not return a response. Please check your internet connection and try again.'
+            'The registration server did not return a response. The form may have been saved already; please wait a moment before submitting again.'
           );
 
           responseTimer = null;
-        }, 30000);
+        }, 20000);
     }
   );
 }
