@@ -22,7 +22,7 @@
  */
 
 const API_URL =
-    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
+    "https://script.google.com/macros/s/AKfycbyGRk1wih2ei0io0evd2KYSXB1UGBFPkvZiqLSSxi5CYIaVo9pL-w_EIS0EB4q5KnVJRA/exec";
 
 
 /* =====================================================
