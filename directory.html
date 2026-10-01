@@ -1145,182 +1145,154 @@
 
 
     /* =================================================
-       CREATE JSONP REQUEST
-       ================================================= */
+   CREATE JSONP REQUEST
+   ================================================= */
 
-    function jsonpRequest(
-        url,
-        callback,
-        timeoutMilliseconds
-    ) {
+let jsonpScript = null;
 
-        const callbackName =
-            "aeroAlumniCallback_" +
-            Date.now() +
-            "_" +
-            (++requestNumber);
+function jsonpRequest(
+    url,
+    callback,
+    timeoutMilliseconds
+) {
 
+    const callbackName =
+        "aeroAlumniDirectoryCallback";
 
-        const script =
-            document.createElement(
-                "script"
-            );
+    let completed = false;
 
+    function cleanup() {
 
-        let completed =
-            false;
+        if (jsonpScript) {
 
+            if (jsonpScript.parentNode) {
 
-        const timeout =
-            setTimeout(
-                function() {
-
-                    if (
-                        completed
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    completed =
-                        true;
-
-
-                    cleanup();
-
-
-                    callback(
-                        null,
-                        new Error(
-                            "Request timed out."
-                        )
-                    );
-
-                },
-                timeoutMilliseconds || 15000
-            );
-
-
-        function cleanup() {
-
-            clearTimeout(
-                timeout
-            );
-
-
-            if (
-                script.parentNode
-            ) {
-
-                script.parentNode.removeChild(
-                    script
+                jsonpScript.parentNode.removeChild(
+                    jsonpScript
                 );
 
             }
 
-
-            try {
-
-                delete window[
-                    callbackName
-                ];
-
-            } catch (error) {
-
-                window[
-                    callbackName
-                ] =
-                    undefined;
-
-            }
+            jsonpScript = null;
 
         }
 
+        try {
 
-        window[
-            callbackName
-        ] =
-            function(data) {
+            delete window[
+                callbackName
+            ];
 
-                if (
-                    completed
-                ) {
+        } catch (error) {
 
-                    return;
+            window[
+                callbackName
+            ] = undefined;
 
-                }
+        }
 
-
-                completed =
-                    true;
+    }
 
 
-                cleanup();
-
-
-                callback(
-                    data,
-                    null
-                );
-
-            };
-
-
-        script.onerror =
+    const timeout =
+        setTimeout(
             function() {
 
-                if (
-                    completed
-                ) {
-
+                if (completed) {
                     return;
-
                 }
 
-
-                completed =
-                    true;
-
+                completed = true;
 
                 cleanup();
-
 
                 callback(
                     null,
                     new Error(
-                        "Unable to contact the directory server."
+                        "Request timed out."
                     )
                 );
 
-            };
-
-
-        const separator =
-            url.indexOf("?") >= 0
-                ? "&"
-                : "?";
-
-
-        script.src =
-            url +
-            separator +
-            "callback=" +
-            encodeURIComponent(
-                callbackName
-            );
-
-
-        script.async =
-            true;
-
-
-        document.body.appendChild(
-            script
+            },
+            timeoutMilliseconds || 15000
         );
 
-    }
+
+    window[
+        callbackName
+    ] =
+        function(data) {
+
+            if (completed) {
+                return;
+            }
+
+            completed = true;
+
+            clearTimeout(timeout);
+
+            cleanup();
+
+            callback(
+                data,
+                null
+            );
+
+        };
+
+
+    jsonpScript =
+        document.createElement(
+            "script"
+        );
+
+
+    jsonpScript.async = true;
+
+
+    jsonpScript.onerror =
+        function() {
+
+            if (completed) {
+                return;
+            }
+
+            completed = true;
+
+            clearTimeout(timeout);
+
+            cleanup();
+
+            callback(
+                null,
+                new Error(
+                    "Unable to contact the directory server."
+                )
+            );
+
+        };
+
+
+    const separator =
+        url.indexOf("?") >= 0
+            ? "&"
+            : "?";
+
+
+    jsonpScript.src =
+        url +
+        separator +
+        "callback=" +
+        encodeURIComponent(
+            callbackName
+        );
+
+
+    document.body.appendChild(
+        jsonpScript
+    );
+
+}
 
 
     /* =================================================
