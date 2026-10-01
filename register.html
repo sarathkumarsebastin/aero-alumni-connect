@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Alumni Registration | Aero Alumni Connect
+    </title>
+
+    <meta
+        name="description"
+        content="Alumni registration for the Department of Aerospace Engineering, School of Mechanical Engineering, VIT Bhopal University."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+     ================================================== -->
+
+<header class="site-header">
+
+    <div class="header-container">
+
+        <a
+            href="index.html"
+            class="brand"
+        >
+
+            <div class="brand-logo">
+
+                <img
+                    src="https://vitbhopal.ac.in/wp-content/uploads/2020/01/logochhota.png"
+                    alt="VIT Bhopal University"
+                >
+
+            </div>
+
+            <div class="brand-text">
+
+                <div class="brand-department">
+                    Department of Aerospace Engineering
+                </div>
+
+                <div class="brand-school">
+                    School of Mechanical Engineering (SMEC)
+                </div>
+
+                <div class="brand-university">
+                    VIT Bhopal University
+                </div>
+
+            </div>
+
+        </a>
+
+
+        <a
+            href="index.html#home"
+            class="btn btn-secondary"
+        >
+            ← Back to Home
+        </a>
+
+    </div>
+
+</header>
+
+
+<!-- ==================================================
+     REGISTRATION PAGE
+     ================================================== -->
+
+<main>
+
+    <section class="registration-section">
+
+        <div class="registration-container">
+
+
+            <div class="section-heading">
+
+                <p class="section-kicker">
+                    ALUMNI NETWORK
+                </p>
+
+                <h1>
+                    Alumni Registration
+                </h1>
+
+                <p>
+                    Join the Aero Alumni Connect network of the
+                    Department of Aerospace Engineering,
+                    School of Mechanical Engineering (SMEC),
+                    VIT Bhopal University.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 INFORMATION NOTICE
+                 ========================================== -->
+
+            <div class="registration-notice">
+
+                <strong>
+                    Before you register
+                </strong>
+
+                <p>
+                    Please enter your details accurately.
+                    Your registration will initially be reviewed
+                    by the department and will remain private
+                    until approved.
+                </p>
+
+                <p>
+                    Your personal email and mobile number will
+                    not be displayed in the public alumni
+                    directory by default.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 REGISTRATION FORM
+                 ========================================== -->
+
+            <form
+                id="alumniRegistrationForm"
+                class="registration-form"
+                novalidate
+            >
+
+
+                <!-- ======================================
+                     HIDDEN SPAM FIELD
+                     ====================================== -->
+
+                <div
+                    class="form-honeypot"
+                    aria-hidden="true"
+                >
+
+                    <label>
+                        Website
+                    </label>
+
+                    <input
+                        type="text"
+                        name="website"
+                        tabindex="-1"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <!-- ======================================
+                     PERSONAL INFORMATION
+                     ====================================== -->
+
+                <fieldset>
+
+                    <legend>
+                        Personal Information
+                    </legend>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="fullName">
+                                Full Name
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                name="fullName"
+                                required
+                                autocomplete="name"
+                                placeholder="Enter your full name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="registrationNo">
+                                University Registration Number
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="registrationNo"
+                                name="registrationNo"
+                                required
+                                placeholder="Example: 20BXA0001"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="graduationYear">
+                                Graduation Year
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="number"
+                                id="graduationYear"
+                                name="graduationYear"
+                                required
+                                min="1950"
+                                max="2036"
+                                placeholder="Example: 2024"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="degree">
+                                Degree
+                                <span>*</span>
+                            </label>
+
+                            <select
+                                id="degree"
+                                name="degree"
+                                required
+                            >
+
+                                <option value="">
+                                    Select degree
+                                </option>
+
+                                <option value="B.Tech Aerospace Engineering">
+                                    B.Tech Aerospace Engineering
+                                </option>
+
+                                <option value="M.Tech Aerospace Engineering">
+                                    M.Tech Aerospace Engineering
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="personalEmail">
+                                Personal Email
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="email"
+                                id="personalEmail"
+                                name="personalEmail"
+                                required
+                                autocomplete="email"
+                                placeholder="your@email.com"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="mobileNumber">
+                                Mobile Number
+                                <span>*</span>
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="mobileNumber"
+                                name="mobileNumber"
+                                required
+                                autocomplete="tel"
+                                placeholder="Enter mobile number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="whatsappNumber">
+                                WhatsApp Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="whatsappNumber"
+                                name="whatsappNumber"
+                                placeholder="Optional"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- ======================================
+                     CURRENT PROFESSIONAL INFORMATION
+                     ====================================== -->
+
+                <fieldset>
+
+                    <legend>
+                        Current Professional Information
+                    </legend>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="currentStatus">
+                                Current Status
+                            </label>
+
+                            <select
+                                id="currentStatus"
+                                name="currentStatus"
+                            >
+
+                                <option value="">
+                                    Select status
+                                </option>
+
+                                <option value="Employed">
+                                    Employed
+                                </option>
+
+                                <option value="Entrepreneur">
+                                    Entrepreneur
+                                </option>
+
+                                <option value="Higher Studies">
+                                    Higher Studies
+                                </option>
+
+                                <option value="Research">
+                                    Research
+                                </option>
+
+                                <option value="Government Service">
+                                    Government Service
+                                </option>
+
+                                <option value="Seeking Opportunities">
+                                    Seeking Opportunities
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="organization">
+                                Organization / University
+                            </label>
+
+                            <input
+                                type="text"
+                                id="organization"
+                                name="organization"
+                                placeholder="Current organization or university"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="designation">
+                                Designation / Role
+                            </label>
+
+                            <input
+                                type="text"
+                                id="designation"
+                                name="designation"
+                                placeholder="Your current designation"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="industrySector">
+                                Industry Sector
+                            </label>
+
+                            <input
+                                type="text"
+                                id="industrySector"
+                                name="industrySector"
+                                placeholder="Example: Aerospace, Defence, IT"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="currentCity">
+                                Current City
+                            </label>
+
+                            <input
+                                type="text"
+                                id="currentCity"
+                                name="currentCity"
+                                placeholder="City"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="currentCountry">
+                                Current Country
+                            </label>
+
+                            <input
+                                type="text"
+                                id="currentCountry"
+                                name="currentCountry"
+                                value="India"
+                                placeholder="Country"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group form-group-full">
+
+                            <label for="technicalExpertise">
+                                Technical Expertise
+                            </label>
+
+                            <textarea
+                                id="technicalExpertise"
+                                name="technicalExpertise"
+                                rows="3"
+                                placeholder="Example: Aircraft Design, CFD, Propulsion, Avionics"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="higherStudies">
+                                Higher Studies
+                            </label>
+
+                            <input
+                                type="text"
+                                id="higherStudies"
+                                name="higherStudies"
+                                placeholder="Degree / Institution / Field"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="professionalCertifications">
+                                Professional Certifications
+                            </label>
+
+                            <input
+                                type="text"
+                                id="professionalCertifications"
+                                name="professionalCertifications"
+                                placeholder="Optional"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group form-group-full">
+
+                            <label for="linkedinUrl">
+                                LinkedIn Profile URL
+                            </label>
+
+                            <input
+                                type="url"
+                                id="linkedinUrl"
+                                name="linkedinUrl"
+                                placeholder="https://www.linkedin.com/in/..."
+                            >
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- ======================================
+                     ALUMNI ENGAGEMENT
+                     ====================================== -->
+
+                <fieldset>
+
+                    <legend>
+                        How would you like to contribute?
+                    </legend>
+
+
+                    <p class="fieldset-description">
+                        Select the activities in which you may
+                        be interested. These preferences can be
+                        changed later.
+                    </p>
+
+
+                    <div class="checkbox-grid">
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="interestedMentoring"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Mentoring students
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="guestLecture"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Guest lectures
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="internshipSupport"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Internship support
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="placementSupport"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Placement support
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="projectGuidance"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Project guidance
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="researchCollaboration"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Research collaboration
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="technicalReview"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Technical review
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="industryConnect"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Industry connect
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="entrepreneurshipGuidance"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Entrepreneurship guidance
+                            </span>
+
+                        </label>
+
+
+                        <label class="checkbox-item">
+
+                            <input
+                                type="checkbox"
+                                name="departmentActivities"
+                                value="Yes"
+                            >
+
+                            <span>
+                                Department activities
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- ======================================
+                     COMMUNICATION
+                     ====================================== -->
+
+                <fieldset>
+
+                    <legend>
+                        Communication Preferences
+                    </legend>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label for="communicationPreference">
+                                Preferred Communication
+                            </label>
+
+                            <select
+                                id="communicationPreference"
+                                name="communicationPreference"
+                            >
+
+                                <option value="">
+                                    Select preference
+                                </option>
+
+                                <option value="Email">
+                                    Email
+                                </option>
+
+                                <option value="WhatsApp">
+                                    WhatsApp
+                                </option>
+
+                                <option value="Phone">
+                                    Phone
+                                </option>
+
+                                <option value="Email and WhatsApp">
+                                    Email and WhatsApp
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+
+
+                <!-- ======================================
+                     CONSENT
+                     ====================================== -->
+
+                <fieldset>
+
+                    <legend>
+                        Confirmation
+                    </legend>
+
+
+                    <label class="consent-item">
+
+                        <input
+                            type="checkbox"
+                            id="registrationConsent"
+                            name="registrationConsent"
+                            required
+                        >
+
+                        <span>
+                            I confirm that the information provided
+                            above is accurate to the best of my
+                            knowledge and I consent to the Department
+                            of Aerospace Engineering using this
+                            information for alumni networking,
+                            departmental activities, and official
+                            alumni communication.
+                            <strong>*</strong>
+                        </span>
+
+                    </label>
+
+                </fieldset>
+
+
+                <!-- ======================================
+                     FORM STATUS
+                     ====================================== -->
+
+                <div
+                    id="registrationMessage"
+                    class="form-message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- ======================================
+                     SUBMIT
+                     ====================================== -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="submit"
+                        id="registrationSubmit"
+                        class="btn btn-primary"
+                    >
+                        Submit Alumni Registration
+                    </button>
+
+                    <a
+                        href="index.html"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ==================================================
+     FOOTER
+     ================================================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+        <p>
+            Aero Alumni Connect
+        </p>
+
+        <p>
+            Department of Aerospace Engineering |
+            School of Mechanical Engineering (SMEC) |
+            VIT Bhopal University
+        </p>
+
+        <p>
+            © <span id="currentYear"></span>
+            VIT Bhopal University
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script
+    src="app.js?v=3"
+></script>
+
+
+</body>
+
+</html>
