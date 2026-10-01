@@ -16,7 +16,7 @@
 
     <meta
         name="description"
-        content="Public alumni directory of the Department of Aerospace Engineering, VIT Bhopal University."
+        content="Public alumni directory of the Department of Aerospace Engineering, School of Mechanical Engineering (SMEC), VIT Bhopal University."
     >
 
 
@@ -117,6 +117,8 @@
 
             border-radius: 6px;
 
+            flex-shrink: 0;
+
         }
 
 
@@ -212,6 +214,8 @@
         .directory-main {
 
             padding: 55px 20px 70px;
+
+            min-height: 650px;
 
         }
 
@@ -390,6 +394,15 @@
         .search-button:hover {
 
             background: #125789;
+
+        }
+
+
+        .search-button:disabled {
+
+            opacity: 0.65;
+
+            cursor: wait;
 
         }
 
@@ -589,6 +602,9 @@
 
             color: #667085;
 
+            grid-column:
+                1 / -1;
+
         }
 
 
@@ -639,6 +655,9 @@
             border-radius: 12px;
 
             border: 1px solid #e4e7ec;
+
+            grid-column:
+                1 / -1;
 
         }
 
@@ -698,13 +717,15 @@
 
             .control-grid {
 
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns:
+                    1fr 1fr;
 
             }
 
             .search-button {
 
-                grid-column: 1 / -1;
+                grid-column:
+                    1 / -1;
 
             }
 
@@ -736,7 +757,8 @@
 
             .control-grid {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
 
             }
 
@@ -750,7 +772,8 @@
 
             .alumni-grid {
 
-                grid-template-columns: 1fr;
+                grid-template-columns:
+                    1fr;
 
             }
 
@@ -829,7 +852,9 @@
     <div class="directory-wrapper">
 
 
-        <!-- TITLE -->
+        <!-- =================================================
+             TITLE
+             ================================================= -->
 
         <section class="directory-title">
 
@@ -850,7 +875,9 @@
         </section>
 
 
-        <!-- SEARCH CONTROLS -->
+        <!-- =================================================
+             SEARCH CONTROLS
+             ================================================= -->
 
         <section class="directory-controls">
 
@@ -867,6 +894,7 @@
                         type="search"
                         id="searchInput"
                         placeholder="Name, organization, expertise, location..."
+                        autocomplete="off"
                     >
 
                 </div>
@@ -903,7 +931,9 @@
         </section>
 
 
-        <!-- MESSAGE -->
+        <!-- =================================================
+             MESSAGE
+             ================================================= -->
 
         <div
             id="directoryMessage"
@@ -913,7 +943,9 @@
         ></div>
 
 
-        <!-- STATUS -->
+        <!-- =================================================
+             STATUS
+             ================================================= -->
 
         <div
             id="directoryStatus"
@@ -923,11 +955,14 @@
         </div>
 
 
-        <!-- RESULTS -->
+        <!-- =================================================
+             RESULTS
+             ================================================= -->
 
         <section
             id="alumniResults"
             class="alumni-grid"
+            aria-live="polite"
         >
 
             <div class="loading">
@@ -977,16 +1012,17 @@
 
 <script>
 
+
     /* =================================================
-       GOOGLE APPS SCRIPT URL
+       GOOGLE APPS SCRIPT WEB APP URL
        ================================================= */
 
     const API_URL =
-        "https://script.google.com/macros/s/AKFycbxgRk1wh2ei0o0evd2KYSXB1UGBFPkvZiqLSSxi5CYIaVo9pL-w_EIS0EB4q5KnVJRA/exec";
+        "https://script.google.com/macros/s/AKFycbxgRk1wh2ei0i0evd2KYSXB1UGBFPkvZiqLSSxi5CYIaVo9pL-w_EIS0EB4q5KnVJRA/exec";
 
 
     /* =================================================
-       ELEMENTS
+       PAGE ELEMENTS
        ================================================= */
 
     const searchInput =
@@ -994,25 +1030,30 @@
             "searchInput"
         );
 
+
     const yearFilter =
         document.getElementById(
             "yearFilter"
         );
+
 
     const searchButton =
         document.getElementById(
             "searchButton"
         );
 
+
     const resultsContainer =
         document.getElementById(
             "alumniResults"
         );
 
+
     const statusElement =
         document.getElementById(
             "directoryStatus"
         );
+
 
     const messageElement =
         document.getElementById(
@@ -1021,7 +1062,14 @@
 
 
     /* =================================================
-       MESSAGE
+       REQUEST COUNTER
+       ================================================= */
+
+    let requestNumber = 0;
+
+
+    /* =================================================
+       SHOW MESSAGE
        ================================================= */
 
     function showMessage(
@@ -1032,6 +1080,7 @@
         messageElement.textContent =
             message;
 
+
         messageElement.className =
             "directory-message " +
             type;
@@ -1039,10 +1088,15 @@
     }
 
 
+    /* =================================================
+       HIDE MESSAGE
+       ================================================= */
+
     function hideMessage() {
 
         messageElement.textContent =
             "";
+
 
         messageElement.className =
             "directory-message";
@@ -1061,22 +1115,27 @@
         return String(
             value || ""
         )
+
             .replace(
                 /&/g,
                 "&amp;"
             )
+
             .replace(
                 /</g,
                 "&lt;"
             )
+
             .replace(
                 />/g,
                 "&gt;"
             )
+
             .replace(
                 /"/g,
                 "&quot;"
             )
+
             .replace(
                 /'/g,
                 "&#039;"
@@ -1086,203 +1145,317 @@
 
 
     /* =================================================
-   LOAD DIRECTORY USING JSONP
-   ================================================= */
+       CREATE JSONP REQUEST
+       ================================================= */
 
-let directoryRequestNumber = 0;
+    function jsonpRequest(
+        url,
+        callback,
+        timeoutMilliseconds
+    ) {
 
-
-function loadDirectory() {
-
-    hideMessage();
-
-
-    resultsContainer.innerHTML = `
-
-        <div class="loading">
-
-            <div class="loading-spinner"></div>
-
-            Loading alumni profiles...
-
-        </div>
-
-    `;
+        const callbackName =
+            "aeroAlumniCallback_" +
+            Date.now() +
+            "_" +
+            (++requestNumber);
 
 
-    statusElement.textContent =
-        "Loading alumni directory...";
+        const script =
+            document.createElement(
+                "script"
+            );
 
 
-    const search =
-        searchInput.value.trim();
+        let completed =
+            false;
 
 
-    const year =
-        yearFilter.value;
+        const timeout =
+            setTimeout(
+                function() {
+
+                    if (
+                        completed
+                    ) {
+
+                        return;
+
+                    }
 
 
-    const callbackName =
-        "handleDirectoryResponse_" +
-        (++directoryRequestNumber);
+                    completed =
+                        true;
 
 
-    const script =
-        document.createElement(
-            "script"
-        );
+                    cleanup();
 
 
-    const timeout =
-        setTimeout(
-            function() {
+                    callback(
+                        null,
+                        new Error(
+                            "Request timed out."
+                        )
+                    );
+
+                },
+                timeoutMilliseconds || 15000
+            );
+
+
+        function cleanup() {
+
+            clearTimeout(
+                timeout
+            );
+
+
+            if (
+                script.parentNode
+            ) {
+
+                script.parentNode.removeChild(
+                    script
+                );
+
+            }
+
+
+            try {
+
+                delete window[
+                    callbackName
+                ];
+
+            } catch (error) {
+
+                window[
+                    callbackName
+                ] =
+                    undefined;
+
+            }
+
+        }
+
+
+        window[
+            callbackName
+        ] =
+            function(data) {
+
+                if (
+                    completed
+                ) {
+
+                    return;
+
+                }
+
+
+                completed =
+                    true;
+
 
                 cleanup();
 
-                resultsContainer.innerHTML =
-                    "";
 
-                statusElement.textContent =
-                    "Unable to load the alumni directory.";
+                callback(
+                    data,
+                    null
+                );
 
-                showMessage(
-                    "The alumni directory could not be loaded. Please try again later.",
-                    "error"
+            };
+
+
+        script.onerror =
+            function() {
+
+                if (
+                    completed
+                ) {
+
+                    return;
+
+                }
+
+
+                completed =
+                    true;
+
+
+                cleanup();
+
+
+                callback(
+                    null,
+                    new Error(
+                        "Unable to contact the directory server."
+                    )
+                );
+
+            };
+
+
+        const separator =
+            url.indexOf("?") >= 0
+                ? "&"
+                : "?";
+
+
+        script.src =
+            url +
+            separator +
+            "callback=" +
+            encodeURIComponent(
+                callbackName
+            );
+
+
+        script.async =
+            true;
+
+
+        document.body.appendChild(
+            script
+        );
+
+    }
+
+
+    /* =================================================
+       LOAD DIRECTORY
+       ================================================= */
+
+    function loadDirectory() {
+
+        hideMessage();
+
+
+        searchButton.disabled =
+            true;
+
+
+        resultsContainer.innerHTML = `
+
+            <div class="loading">
+
+                <div class="loading-spinner"></div>
+
+                Loading alumni profiles...
+
+            </div>
+
+        `;
+
+
+        statusElement.textContent =
+            "Loading alumni directory...";
+
+
+        const search =
+            searchInput.value.trim();
+
+
+        const year =
+            yearFilter.value;
+
+
+        const url =
+            API_URL +
+            "?action=directory" +
+            "&q=" +
+            encodeURIComponent(
+                search
+            ) +
+            "&year=" +
+            encodeURIComponent(
+                year
+            );
+
+
+        jsonpRequest(
+            url,
+            function(
+                data,
+                error
+            ) {
+
+                searchButton.disabled =
+                    false;
+
+
+                if (
+                    error
+                ) {
+
+                    console.error(
+                        "Directory request failed:",
+                        error
+                    );
+
+
+                    resultsContainer.innerHTML =
+                        "";
+
+
+                    statusElement.textContent =
+                        "Unable to load the alumni directory.";
+
+
+                    showMessage(
+                        "The alumni directory could not be loaded. Please try again later.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                console.log(
+                    "Alumni Directory API Response:",
+                    data
+                );
+
+
+                if (
+                    !data ||
+                    data.success !== true
+                ) {
+
+                    resultsContainer.innerHTML =
+                        "";
+
+
+                    statusElement.textContent =
+                        "Unable to load the alumni directory.";
+
+
+                    showMessage(
+                        data &&
+                        data.message
+                            ? data.message
+                            : "The directory server returned an error.",
+                        "error"
+                    );
+
+
+                    return;
+
+                }
+
+
+                displayAlumni(
+                    data.alumni || []
                 );
 
             },
             15000
         );
 
-
-    function cleanup() {
-
-        clearTimeout(
-            timeout
-        );
-
-
-        if (script.parentNode) {
-
-            script.parentNode.removeChild(
-                script
-            );
-
-        }
-
-
-        try {
-
-            delete window[
-                callbackName
-            ];
-
-        } catch (error) {
-
-            window[
-                callbackName
-            ] = undefined;
-
-        }
-
     }
-
-
-    window[
-        callbackName
-    ] =
-        function(data) {
-
-            cleanup();
-
-
-            console.log(
-                "Alumni Directory API:",
-                data
-            );
-
-
-            if (
-                !data ||
-                !data.success
-            ) {
-
-                resultsContainer.innerHTML =
-                    "";
-
-                statusElement.textContent =
-                    "Unable to load the alumni directory.";
-
-                showMessage(
-                    data &&
-                    data.message
-                        ? data.message
-                        : "Directory API returned an error.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            displayAlumni(
-                data.alumni || []
-            );
-
-        };
-
-
-    const url =
-        API_URL +
-        "?action=directory" +
-        "&q=" +
-        encodeURIComponent(
-            search
-        ) +
-        "&year=" +
-        encodeURIComponent(
-            year
-        ) +
-        "&callback=" +
-        encodeURIComponent(
-            callbackName
-        );
-
-
-    script.src =
-        url;
-
-
-    script.async =
-        true;
-
-
-    script.onerror =
-        function() {
-
-            cleanup();
-
-
-            resultsContainer.innerHTML =
-                "";
-
-            statusElement.textContent =
-                "Unable to load the alumni directory.";
-
-            showMessage(
-                "The alumni directory could not be loaded. Please try again later.",
-                "error"
-            );
-
-        };
-
-
-    document.body.appendChild(
-        script
-    );
-
-}
 
 
     /* =================================================
@@ -1298,7 +1471,9 @@ function loadDirectory() {
 
 
         if (
-            !alumni ||
+            !Array.isArray(
+                alumni
+            ) ||
             alumni.length === 0
         ) {
 
@@ -1322,6 +1497,7 @@ function loadDirectory() {
                 </div>
 
             `;
+
 
             return;
 
@@ -1374,8 +1550,13 @@ function loadDirectory() {
             "alumni-card";
 
 
-        let html = "";
+        let html =
+            "";
 
+
+        /* ---------------------------------------------
+           NAME
+           --------------------------------------------- */
 
         html += `
 
@@ -1388,6 +1569,10 @@ function loadDirectory() {
         `;
 
 
+        /* ---------------------------------------------
+           DEGREE
+           --------------------------------------------- */
+
         if (
             person.degree
         ) {
@@ -1395,15 +1580,21 @@ function loadDirectory() {
             html += `
 
                 <div class="alumni-degree">
+
                     ${escapeHtml(
                         person.degree
                     )}
+
                 </div>
 
             `;
 
         }
 
+
+        /* ---------------------------------------------
+           GRADUATION
+           --------------------------------------------- */
 
         if (
             person.graduationYear
@@ -1428,6 +1619,10 @@ function loadDirectory() {
         }
 
 
+        /* ---------------------------------------------
+           ORGANIZATION
+           --------------------------------------------- */
+
         if (
             person.organization
         ) {
@@ -1450,6 +1645,10 @@ function loadDirectory() {
 
         }
 
+
+        /* ---------------------------------------------
+           DESIGNATION
+           --------------------------------------------- */
 
         if (
             person.designation
@@ -1474,6 +1673,10 @@ function loadDirectory() {
         }
 
 
+        /* ---------------------------------------------
+           INDUSTRY
+           --------------------------------------------- */
+
         if (
             person.industrySector
         ) {
@@ -1497,6 +1700,10 @@ function loadDirectory() {
         }
 
 
+        /* ---------------------------------------------
+           LOCATION
+           --------------------------------------------- */
+
         if (
             person.currentCity ||
             person.currentCountry
@@ -1507,8 +1714,14 @@ function loadDirectory() {
                     person.currentCity,
                     person.currentCountry
                 ]
-                    .filter(Boolean)
-                    .join(", ");
+
+                    .filter(
+                        Boolean
+                    )
+
+                    .join(
+                        ", "
+                    );
 
 
             html += `
@@ -1529,6 +1742,10 @@ function loadDirectory() {
 
         }
 
+
+        /* ---------------------------------------------
+           CURRENT STATUS
+           --------------------------------------------- */
 
         if (
             person.currentStatus
@@ -1553,23 +1770,17 @@ function loadDirectory() {
         }
 
 
+        /* ---------------------------------------------
+           TECHNICAL EXPERTISE
+           --------------------------------------------- */
+
         if (
-            person.technicalExpertise ||
-            person.higherStudies
+            person.technicalExpertise
         ) {
 
             html += `
 
                 <div class="alumni-expertise">
-
-            `;
-
-
-            if (
-                person.technicalExpertise
-            ) {
-
-                html += `
 
                     <strong>
                         Technical Expertise
@@ -1581,39 +1792,34 @@ function loadDirectory() {
                         )}
                     </div>
 
-                `;
+                </div>
 
-            }
+            `;
+
+        }
 
 
-            if (
-                person.higherStudies
-            ) {
+        /* ---------------------------------------------
+           HIGHER STUDIES
+           --------------------------------------------- */
 
-                html += `
-
-                    <div
-                        style="margin-top:10px;"
-                    >
-
-                        <strong>
-                            Higher Studies
-                        </strong>
-
-                        <div>
-                            ${escapeHtml(
-                                person.higherStudies
-                            )}
-                        </div>
-
-                    </div>
-
-                `;
-
-            }
-
+        if (
+            person.higherStudies
+        ) {
 
             html += `
+
+                <div class="alumni-expertise">
+
+                    <strong>
+                        Higher Studies
+                    </strong>
+
+                    <div>
+                        ${escapeHtml(
+                            person.higherStudies
+                        )}
+                    </div>
 
                 </div>
 
@@ -1621,6 +1827,39 @@ function loadDirectory() {
 
         }
 
+
+        /* ---------------------------------------------
+           CERTIFICATIONS
+           --------------------------------------------- */
+
+        if (
+            person.professionalCertifications
+        ) {
+
+            html += `
+
+                <div class="alumni-expertise">
+
+                    <strong>
+                        Professional Certifications
+                    </strong>
+
+                    <div>
+                        ${escapeHtml(
+                            person.professionalCertifications
+                        )}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* ---------------------------------------------
+           LINKEDIN
+           --------------------------------------------- */
 
         if (
             person.linkedinUrl
@@ -1673,126 +1912,152 @@ function loadDirectory() {
 
 
     /* =================================================
-       POPULATE YEAR FILTER
+       LOAD GRADUATION YEARS
        ================================================= */
 
-    async function loadYears() {
+    function loadYears() {
 
-        try {
-
-            const response =
-                await fetch(
-                    API_URL +
-                    "?action=directory",
-                    {
-                        method: "GET",
-                        cache: "no-store"
-                    }
-                );
+        const url =
+            API_URL +
+            "?action=directory";
 
 
-            if (!response.ok) {
-
-                return;
-
-            }
-
-
-            const data =
-                await response.json();
-
-
-            if (
-                !data.success ||
-                !Array.isArray(
-                    data.alumni
-                )
+        jsonpRequest(
+            url,
+            function(
+                data,
+                error
             ) {
 
-                return;
+                if (
+                    error
+                ) {
 
-            }
-
-
-            const years =
-                [
-                    ...new Set(
-                        data.alumni
-                            .map(
-                                function(person) {
-
-                                    return String(
-                                        person.graduationYear ||
-                                        ""
-                                    );
-
-                                }
-                            )
-                            .filter(Boolean)
-                    )
-                ]
-                    .sort(
-                        function(a, b) {
-
-                            return Number(b) -
-                                Number(a);
-
-                        }
+                    console.warn(
+                        "Unable to populate year filter:",
+                        error
                     );
 
 
-            years.forEach(
-                function(year) {
+                    return;
 
-                    const option =
-                        document.createElement(
-                            "option"
+                }
+
+
+                if (
+                    !data ||
+                    data.success !== true ||
+                    !Array.isArray(
+                        data.alumni
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                const years =
+                    [
+                        ...new Set(
+
+                            data.alumni
+
+                                .map(
+                                    function(person) {
+
+                                        return String(
+                                            person.graduationYear ||
+                                            ""
+                                        );
+
+                                    }
+                                )
+
+                                .filter(
+                                    Boolean
+                                )
+
+                        )
+                    ]
+
+                        .sort(
+                            function(
+                                a,
+                                b
+                            ) {
+
+                                return (
+                                    Number(b) -
+                                    Number(a)
+                                );
+
+                            }
                         );
 
 
-                    option.value =
-                        year;
+                years.forEach(
+                    function(year) {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
 
 
-                    option.textContent =
-                        year;
+                        option.value =
+                            year;
 
 
-                    yearFilter.appendChild(
-                        option
-                    );
-
-                }
-            );
+                        option.textContent =
+                            year;
 
 
-        } catch (error) {
+                        yearFilter.appendChild(
+                            option
+                        );
 
-            console.warn(
-                "Unable to populate year filter:",
-                error
-            );
+                    }
+                );
 
-        }
+            },
+            15000
+        );
 
     }
 
 
     /* =================================================
-       EVENTS
+       SEARCH BUTTON
        ================================================= */
 
     searchButton.addEventListener(
         "click",
-        loadDirectory
+        function() {
+
+            loadDirectory();
+
+        }
     );
 
+
+    /* =================================================
+       YEAR FILTER
+       ================================================= */
 
     yearFilter.addEventListener(
         "change",
-        loadDirectory
+        function() {
+
+            loadDirectory();
+
+        }
     );
 
+
+    /* =================================================
+       ENTER KEY SEARCH
+       ================================================= */
 
     searchInput.addEventListener(
         "keydown",
@@ -1813,12 +2078,13 @@ function loadDirectory() {
 
 
     /* =================================================
-       START
+       INITIALIZE
        ================================================= */
 
     loadYears();
 
     loadDirectory();
+
 
 </script>
 
