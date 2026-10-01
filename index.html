@@ -3,142 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Aero Alumni Connect - Department of Aerospace Engineering, VIT Bhopal University.">
-  <title>Aero Alumni Connect | VIT Bhopal University</title>
+  <meta name="description" content="VIT Aero Alumni Connect - Department of Aerospace Engineering, VIT Bhopal University">
+  <title>VIT Aero Alumni Connect</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="topbar"></div>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html#home" aria-label="Aero Alumni Connect home">
-        <img class="brand-logo" src="https://vitbhopal.ac.in/wp-content/uploads/2020/01/logochhota.png" alt="VIT Bhopal University logo">
-        <div>
-          <div class="brand-title">Aero Alumni Connect</div>
-          <div class="brand-subtitle">Department of Aerospace Engineering · SMEC · VIT Bhopal University</div>
+<div class="topline"></div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#home">
+      <img
+        class="brand-logo"
+        src="https://vitbhopal.ac.in/wp-content/uploads/2020/01/logochhota.png"
+        alt="VIT Bhopal University logo"
+      >
+      <div>
+        <h1 class="brand-title">VIT Aero Alumni Connect</h1>
+        <p class="brand-subtitle">Department of Aerospace Engineering · SMEC · VIT Bhopal University</p>
+      </div>
+    </a>
+
+    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-label="Open navigation">
+      Menu
+    </button>
+
+    <nav class="main-nav" data-mobile-nav aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a data-directory-link href="#">Directory</a>
+      <a href="register.html">Register</a>
+      <a href="#engagement">Engagement</a>
+      <a href="#professional">Portal</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <p class="hero-kicker">DEPARTMENT OF AEROSPACE ENGINEERING</p>
+        <h1>VIT Aero Alumni Connect</h1>
+        <p class="hero-lead">
+          Connecting Alumni • Inspiring Students • Strengthening the Department
+        </p>
+        <p class="hero-lead">
+          A professional digital platform designed to make alumni engagement
+          organised, practical and meaningful for graduates, students and the
+          Department of Aerospace Engineering at VIT Bhopal University.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" data-directory-link href="#">Explore Alumni Directory</a>
+          <a class="button button-outline" href="register.html">Join the Alumni Network</a>
         </div>
-      </a>
-      <button id="mobileMenuButton" class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
-      <nav id="siteNav" class="site-nav" aria-label="Main navigation">
-        <a href="index.html#home">Home</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#engagement">Engagement</a>
-        <a href="register.html">Register</a>
-        <a class="nav-primary" data-directory-link href="https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec?action=directoryPage">Alumni Directory</a>
-      </nav>
+      </div>
+
+      <aside class="hero-panel">
+        <h2>A professional alumni ecosystem</h2>
+        <p>
+          Discover alumni, share opportunities, celebrate achievements,
+          participate in department activities and create meaningful
+          mentorship connections — all through one focused portal.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <strong>Alumni</strong>
+            <span>Connect with the aerospace community</span>
+          </div>
+          <div class="stat">
+            <strong>Opportunities</strong>
+            <span>Share professional and academic possibilities</span>
+          </div>
+          <div class="stat">
+            <strong>Mentorship</strong>
+            <span>Strengthen student-alumni interaction</span>
+          </div>
+        </div>
+      </aside>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="container hero-grid">
-        <div>
-          <p class="hero-kicker">Aero Alumni Connect</p>
-          <h1>Connecting Alumni • Inspiring Students • Strengthening the Department</h1>
-          <p class="hero-tagline">A digital alumni network for the Department of Aerospace Engineering, School of Mechanical Engineering (SMEC), VIT Bhopal University.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="register.html">Register as Alumni</a>
-            <a class="btn btn-outline" data-directory-link href="https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec?action=directoryPage">Explore Alumni Directory</a>
-          </div>
-        </div>
-        <aside class="hero-card">
-          <h2>What the portal enables</h2>
-          <ul>
-            <li>Build a verified alumni community.</li>
-            <li>Support mentoring, projects and internships.</li>
-            <li>Connect students with industry and higher-study experience.</li>
-            <li>Highlight alumni achievements and department engagement.</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section id="about" class="section section-white">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">About the portal</div>
-          <h2>A focused alumni network for Aerospace Engineering</h2>
-          <p>The portal provides a simple, low-cost foundation for maintaining alumni records while keeping private contact information out of the public directory.</p>
-        </div>
-        <div class="feature-grid">
-          <article class="card feature-card">
-            <div class="feature-icon">A</div>
-            <h3>Alumni Registration</h3>
-            <p>Alumni can submit their academic, professional and engagement information for departmental review.</p>
-          </article>
-          <article class="card feature-card">
-            <div class="feature-icon">D</div>
-            <h3>Public Directory</h3>
-            <p>Approved alumni who choose public visibility can be discovered by name, graduation year, organization, expertise and location.</p>
-          </article>
-          <article class="card feature-card">
-            <div class="feature-icon">C</div>
-            <h3>Department Connections</h3>
-            <p>The data structure supports mentoring, guest lectures, internships, placements, projects and industry collaboration.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="engagement" class="section">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">Alumni engagement</div>
-          <h2>Ways alumni can contribute</h2>
-          <p>Choose the areas where your experience can support current students and departmental activities.</p>
-        </div>
-        <div class="info-grid">
-          <article class="info-panel">
-            <h3>Academic &amp; Career Support</h3>
-            <ul>
-              <li>Mentoring and career guidance</li>
-              <li>Guest lectures and technical sessions</li>
-              <li>Internship and placement support</li>
-              <li>Project guidance and technical review</li>
-            </ul>
-          </article>
-          <article class="info-panel">
-            <h3>Industry &amp; Research Connections</h3>
-            <ul>
-              <li>Research collaboration</li>
-              <li>Industry connections and expert interaction</li>
-              <li>Higher-study guidance</li>
-              <li>Entrepreneurship and innovation guidance</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-white">
-      <div class="container">
-        <div class="cta">
-          <div>
-            <h2>Be part of the Aerospace alumni network</h2>
-            <p>Register your details and help strengthen connections between alumni, students and the department.</p>
-          </div>
-          <a class="btn btn-primary" href="register.html">Register Now</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
+  <section class="section" id="engagement">
     <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h3>Aero Alumni Connect</h3>
-          <p>Department of Aerospace Engineering<br>School of Mechanical Engineering (SMEC)<br>VIT Bhopal University</p>
+      <div class="section-heading">
+        <p class="section-kicker">ALUMNI COMMUNITY</p>
+        <h2>Everything important in one professional portal</h2>
+        <p>
+          The portal brings together the activities that help an alumni
+          community remain connected, visible and useful to the department.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+          <div class="feature-icon">AD</div>
+          <h3>Alumni Directory</h3>
+          <p>
+            Explore approved alumni profiles and discover professional,
+            academic and industry connections.
+          </p>
+          <a class="card-link" data-directory-link href="#">Open Directory →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">OP</div>
+          <h3>Opportunities</h3>
+          <p>
+            Share internships, jobs, projects, higher-study possibilities,
+            competitions and other relevant opportunities.
+          </p>
+          <a class="card-link"
+             href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=opportunitiesPage"
+             target="_blank">Explore Opportunities →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">AC</div>
+          <h3>Achievements</h3>
+          <p>
+            Showcase alumni milestones, professional accomplishments,
+            academic achievements and contributions.
+          </p>
+          <a class="card-link"
+             href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=achievementsPage"
+             target="_blank">View Achievements →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">DA</div>
+          <h3>Department Activities</h3>
+          <p>
+            Keep the community informed about alumni meets, talks, workshops,
+            technical sessions and department programmes.
+          </p>
+          <a class="card-link"
+             href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=activitiesPage"
+             target="_blank">View Activities →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">ME</div>
+          <h3>Mentorship</h3>
+          <p>
+            Build structured opportunities for alumni to guide students in
+            careers, projects, higher studies and professional development.
+          </p>
+          <a class="card-link"
+             href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=mentorshipPage"
+             target="_blank">Explore Mentorship →</a>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">GL</div>
+          <h3>Guest Lectures</h3>
+          <p>
+            Create a visible pathway for alumni and industry professionals
+            to contribute talks, technical sessions and knowledge sharing.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">IS</div>
+          <h3>Internship & Placement Support</h3>
+          <p>
+            Strengthen connections that can support internships, placement
+            awareness, referrals and industry exposure.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">RC</div>
+          <h3>Research & Industry Connect</h3>
+          <p>
+            Encourage project guidance, technical review, research
+            collaboration, industry interaction and entrepreneurship.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="professional">
+    <div class="container">
+      <div class="section-heading">
+        <p class="section-kicker">WHY THIS PORTAL MATTERS</p>
+        <h2>A practical and professional alumni platform</h2>
+        <p>
+          VIT Aero Alumni Connect is designed as a focused digital space for
+          maintaining an active relationship between alumni, students and the
+          Department of Aerospace Engineering.
+        </p>
+      </div>
+
+      <div class="professional">
+        <div class="professional-panel">
+          <h2>Built for meaningful engagement</h2>
+          <p>
+            The portal gives the department a structured place to maintain
+            alumni connections, communicate opportunities, recognise alumni
+            contributions and create pathways for students to learn from
+            experienced professionals.
+          </p>
+          <p style="margin-top:16px">
+            It is designed to grow with the department — from a clean alumni
+            directory today to a broader professional community over time.
+          </p>
         </div>
-        <div>
-          <h3>Portal</h3>
-          <p><a href="register.html">Alumni Registration</a><br><a data-directory-link href="https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec?action=directoryPage">Public Alumni Directory</a></p>
+
+        <div class="professional-list">
+          <h3>The portal supports</h3>
+          <ul class="check-list">
+            <li>Professional alumni profiles</li>
+            <li>Student-alumni interaction</li>
+            <li>Mentorship and career guidance</li>
+            <li>Internship and placement connections</li>
+            <li>Guest lectures and technical sessions</li>
+            <li>Alumni achievements</li>
+            <li>Department activities</li>
+            <li>Research collaboration</li>
+            <li>Industry connections</li>
+            <li>Project guidance and technical review</li>
+            <li>Higher-study interaction</li>
+            <li>Entrepreneurship guidance</li>
+          </ul>
         </div>
       </div>
-      <div class="footer-bottom">© <span data-current-year>2026</span> Aero Alumni Connect · VIT Bhopal University</div>
     </div>
-  </footer>
+  </section>
 
-  <script src="app.js"></script>
+  <section class="section">
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2>Become part of the aerospace alumni community</h2>
+          <p>
+            Register your profile and help strengthen the connection between
+            alumni, students and the department.
+          </p>
+        </div>
+        <a class="button button-primary" href="register.html">Register as Alumni</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>VIT Aero Alumni Connect</h3>
+      <p>Department of Aerospace Engineering</p>
+      <p>School of Mechanical Engineering (SMEC)</p>
+      <p>VIT Bhopal University</p>
+    </div>
+
+    <div>
+      <h3>Community</h3>
+      <p><a data-directory-link href="#">Alumni Directory</a></p>
+      <p><a href="register.html">Alumni Registration</a></p>
+      <p><a href="#engagement">Community Engagement</a></p>
+    </div>
+
+    <div>
+      <h3>Portal Areas</h3>
+      <p><a href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=opportunitiesPage" target="_blank">Opportunities</a></p>
+      <p><a href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=achievementsPage" target="_blank">Achievements</a></p>
+      <p><a href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=activitiesPage" target="_blank">Activities</a></p>
+      <p><a href="https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec?action=mentorshipPage" target="_blank">Mentorship</a></p>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    © <span data-current-year></span> VIT Aero Alumni Connect · VIT Bhopal University
+  </div>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
