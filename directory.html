@@ -1086,76 +1086,114 @@
 
 
     /* =================================================
-       LOAD DIRECTORY
-       ================================================= */
+   LOAD DIRECTORY USING JSONP
+   ================================================= */
 
-    async function loadDirectory() {
-
-        hideMessage();
+let directoryRequestNumber = 0;
 
 
-        resultsContainer.innerHTML = `
+function loadDirectory() {
 
-            <div class="loading">
-
-                <div class="loading-spinner"></div>
-
-                Loading alumni profiles...
-
-            </div>
-
-        `;
+    hideMessage();
 
 
-        statusElement.textContent =
-            "Loading alumni directory...";
+    resultsContainer.innerHTML = `
+
+        <div class="loading">
+
+            <div class="loading-spinner"></div>
+
+            Loading alumni profiles...
+
+        </div>
+
+    `;
+
+
+    statusElement.textContent =
+        "Loading alumni directory...";
+
+
+    const search =
+        searchInput.value.trim();
+
+
+    const year =
+        yearFilter.value;
+
+
+    const callbackName =
+        "handleDirectoryResponse_" +
+        (++directoryRequestNumber);
+
+
+    const script =
+        document.createElement(
+            "script"
+        );
+
+
+    const timeout =
+        setTimeout(
+            function() {
+
+                cleanup();
+
+                resultsContainer.innerHTML =
+                    "";
+
+                statusElement.textContent =
+                    "Unable to load the alumni directory.";
+
+                showMessage(
+                    "The alumni directory could not be loaded. Please try again later.",
+                    "error"
+                );
+
+            },
+            15000
+        );
+
+
+    function cleanup() {
+
+        clearTimeout(
+            timeout
+        );
+
+
+        if (script.parentNode) {
+
+            script.parentNode.removeChild(
+                script
+            );
+
+        }
 
 
         try {
 
-            const search =
-                searchInput.value.trim();
+            delete window[
+                callbackName
+            ];
+
+        } catch (error) {
+
+            window[
+                callbackName
+            ] = undefined;
+
+        }
+
+    }
 
 
-            const year =
-                yearFilter.value;
+    window[
+        callbackName
+    ] =
+        function(data) {
 
-
-            const url =
-                API_URL +
-                "?action=directory" +
-                "&q=" +
-                encodeURIComponent(
-                    search
-                ) +
-                "&year=" +
-                encodeURIComponent(
-                    year
-                );
-
-
-            const response =
-                await fetch(
-                    url,
-                    {
-                        method: "GET",
-                        cache: "no-store"
-                    }
-                );
-
-
-            if (!response.ok) {
-
-                throw new Error(
-                    "HTTP error " +
-                    response.status
-                );
-
-            }
-
-
-            const data =
-                await response.json();
+            cleanup();
 
 
             console.log(
@@ -1164,12 +1202,26 @@
             );
 
 
-            if (!data.success) {
+            if (
+                !data ||
+                !data.success
+            ) {
 
-                throw new Error(
-                    data.message ||
-                    "Directory API returned an error."
+                resultsContainer.innerHTML =
+                    "";
+
+                statusElement.textContent =
+                    "Unable to load the alumni directory.";
+
+                showMessage(
+                    data &&
+                    data.message
+                        ? data.message
+                        : "Directory API returned an error.",
+                    "error"
                 );
+
+                return;
 
             }
 
@@ -1178,31 +1230,59 @@
                 data.alumni || []
             );
 
+        };
 
-        } catch (error) {
 
-            console.error(
-                "Directory loading failed:",
-                error
-            );
+    const url =
+        API_URL +
+        "?action=directory" +
+        "&q=" +
+        encodeURIComponent(
+            search
+        ) +
+        "&year=" +
+        encodeURIComponent(
+            year
+        ) +
+        "&callback=" +
+        encodeURIComponent(
+            callbackName
+        );
+
+
+    script.src =
+        url;
+
+
+    script.async =
+        true;
+
+
+    script.onerror =
+        function() {
+
+            cleanup();
 
 
             resultsContainer.innerHTML =
                 "";
 
-
             statusElement.textContent =
                 "Unable to load the alumni directory.";
-
 
             showMessage(
                 "The alumni directory could not be loaded. Please try again later.",
                 "error"
             );
 
-        }
+        };
 
-    }
+
+    document.body.appendChild(
+        script
+    );
+
+}
 
 
     /* =================================================
