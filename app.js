@@ -1,482 +1,125 @@
-/* =====================================================
-   AERO ALUMNI CONNECT
-   FRONTEND JAVASCRIPT
+/* =========================================================
+   AERO ALUMNI CONNECT - SHARED FRONTEND JAVASCRIPT
+   GitHub Pages frontend
+   ========================================================= */
 
-   Department of Aerospace Engineering
-   School of Mechanical Engineering (SMEC)
-   VIT Bhopal University
-   ===================================================== */
+const AERO_CONFIG = {
+  apiUrl: 'https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec',
+  directoryUrl: 'https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec?action=directoryPage'
+};
 
+(function () {
+  'use strict';
 
-/* =====================================================
-   GOOGLE APPS SCRIPT BACKEND
-   ===================================================== */
+  function byId(id) {
+    return document.getElementById(id);
+  }
 
-/*
- * IMPORTANT:
- * Replace the URL below with your ORIGINAL Google Apps
- * Script Web App URL ending in /exec.
- *
- * Example:
- * https://script.google.com/macros/s/XXXXXXXXXXXX/exec
- */
+  function setCurrentYear() {
+    document.querySelectorAll('[data-current-year]').forEach(function (el) {
+      el.textContent = String(new Date().getFullYear());
+    });
+  }
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbzeZv2jXsJOExSQOEg3EQbxRs91FfZIfG8o6nqHL_Z3F63wylZTm6TX75Y-04zG52WctA/exec";
+  function setupMobileNav() {
+    var button = byId('mobileMenuButton');
+    var nav = byId('siteNav');
+    if (!button || !nav) return;
 
+    button.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
 
-/* =====================================================
-   MOBILE NAVIGATION
-   ===================================================== */
+    nav.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        nav.classList.remove('is-open');
+        button.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
-const menuButton =
-    document.getElementById("menuButton");
+  function setupDirectoryLinks() {
+    document.querySelectorAll('[data-directory-link]').forEach(function (link) {
+      link.href = AERO_CONFIG.directoryUrl;
+    });
+  }
 
-const navigation =
-    document.getElementById("mainNavigation");
+  function setupSmoothAnchors() {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        var targetId = link.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        var target = document.querySelector(targetId);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', targetId);
+      });
+    });
+  }
 
+  function showRegistrationStatus(type, message) {
+    var box = byId('registrationStatus');
+    if (!box) return;
+    box.className = 'form-status ' + type;
+    box.textContent = message;
+    box.hidden = false;
+  }
 
-if (menuButton && navigation) {
+  function setupRegistrationForm() {
+    var form = byId('registrationForm');
+    var iframe = byId('registrationResponseFrame');
+    if (!form || !iframe) return;
 
-    menuButton.addEventListener(
-        "click",
-        function () {
+    var submitted = false;
+    var submitButton = form.querySelector('button[type="submit"]');
+    var originalButtonText = submitButton ? submitButton.textContent : 'Submit Registration';
 
-            const isActive =
-                navigation.classList.toggle("active");
+    window.addEventListener('message', function (event) {
+      var data = event.data;
+      if (!data || data.type !== 'aeroAlumniRegistration') return;
+      if (!submitted) return;
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                isActive ? "true" : "false"
-            );
+      var payload = data.payload || {};
+      submitted = false;
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
 
-        }
-    );
-
-}
-
-
-/* =====================================================
-   CLOSE MOBILE MENU AFTER CLICKING A LINK
-   ===================================================== */
-
-const navigationLinks =
-    document.querySelectorAll(
-        ".main-navigation a"
-    );
-
-
-navigationLinks.forEach(
-    function (link) {
-
-        link.addEventListener(
-            "click",
-            function () {
-
-                if (navigation) {
-
-                    navigation.classList.remove(
-                        "active"
-                    );
-
-                }
-
-                if (menuButton) {
-
-                    menuButton.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
+      if (payload.success) {
+        showRegistrationStatus(
+          'success',
+          'Registration submitted successfully. Your Alumni ID is ' +
+          (payload.alumniId || 'pending') +
+          '. Your profile will remain private until it is reviewed and approved.'
         );
-
-    }
-);
-
-
-/* =====================================================
-   CURRENT YEAR
-   ===================================================== */
-
-const yearElement =
-    document.getElementById("currentYear");
-
-
-if (yearElement) {
-
-    yearElement.textContent =
-        new Date().getFullYear();
-
-}
-
-
-/* =====================================================
-   TEST GOOGLE APPS SCRIPT BACKEND
-   ===================================================== */
-
-async function testBackendConnection() {
-
-    if (
-        !API_URL ||
-        API_URL ===
-        "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE"
-    ) {
-
-        console.error(
-            "Google Apps Script Web App URL has not been configured."
+        form.reset();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showRegistrationStatus(
+          'error',
+          payload.message || 'Registration could not be submitted. Please check the form and try again.'
         );
-
-        return {
-
-            success: false,
-
-            message:
-                "Backend URL is not configured."
-
-        };
-
-    }
-
-
-    try {
-
-        const response =
-            await fetch(
-                API_URL +
-                "?action=health",
-                {
-                    method: "GET",
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "HTTP error: " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        console.log(
-            "Aero Alumni Connect Backend Response:",
-            data
-        );
-
-
-        if (data.success) {
-
-            console.log(
-                "✓ Aero Alumni Connect backend connection successful."
-            );
-
-        } else {
-
-            console.warn(
-                "Backend responded, but reported an error.",
-                data
-            );
-
-        }
-
-
-        return data;
-
-
-    } catch (error) {
-
-        console.error(
-            "Aero Alumni Connect backend connection failed:",
-            error
-        );
-
-
-        return {
-
-            success: false,
-
-            message:
-                error.message
-
-        };
-
-    }
-
-}
-
-
-/* =====================================================
-   START BACKEND CONNECTION TEST
-   ===================================================== */
-
-testBackendConnection();
-
-/* =====================================================
-   ALUMNI REGISTRATION
-   ===================================================== */
-
-const alumniRegistrationForm =
-    document.getElementById(
-        "alumniRegistrationForm"
-    );
-
-
-if (alumniRegistrationForm) {
-
-    alumniRegistrationForm.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            const messageElement =
-                document.getElementById(
-                    "registrationMessage"
-                );
-
-
-            const submitButton =
-                document.getElementById(
-                    "registrationSubmit"
-                );
-
-
-            function showMessage(
-                message,
-                type
-            ) {
-
-                if (!messageElement) {
-                    return;
-                }
-
-                messageElement.textContent =
-                    message;
-
-                messageElement.className =
-                    "form-message " +
-                    type;
-
-            }
-
-
-            /* -----------------------------------------
-               BASIC FRONTEND VALIDATION
-               ----------------------------------------- */
-
-            if (
-                !alumniRegistrationForm.checkValidity()
-            ) {
-
-                alumniRegistrationForm.reportValidity();
-
-                return;
-
-            }
-
-
-            /* -----------------------------------------
-               DISABLE BUTTON
-               ----------------------------------------- */
-
-            if (submitButton) {
-
-                submitButton.disabled = true;
-
-                submitButton.textContent =
-                    "Submitting...";
-
-            }
-
-
-            showMessage(
-                "Submitting your registration. Please wait...",
-                "success"
-            );
-
-
-            try {
-
-                const formData =
-                    new FormData(
-                        alumniRegistrationForm
-                    );
-
-
-                formData.append(
-                    "action",
-                    "registerAlumni"
-                );
-
-
-                /*
-                 * Convert FormData to URL encoded data.
-                 *
-                 * This keeps the request simple and avoids
-                 * unnecessary browser CORS preflight requests.
-                 */
-
-                const body =
-                    new URLSearchParams();
-
-
-                formData.forEach(
-                    function (
-                        value,
-                        key
-                    ) {
-
-                        body.append(
-                            key,
-                            value
-                        );
-
-                    }
-                );
-
-
-                const response =
-                    await fetch(
-                        API_URL,
-                        {
-
-                            method: "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/x-www-form-urlencoded;charset=UTF-8"
-
-                            },
-
-                            body:
-                                body.toString(),
-
-                            cache: "no-store"
-
-                        }
-                    );
-
-
-                if (!response.ok) {
-
-                    throw new Error(
-                        "HTTP error: " +
-                        response.status
-                    );
-
-                }
-
-
-                const result =
-                    await response.json();
-
-
-                console.log(
-                    "Alumni Registration Response:",
-                    result
-                );
-
-
-                /* -------------------------------------
-                   SUCCESS
-                   ------------------------------------- */
-
-                if (result.success) {
-
-                    showMessage(
-                        "Registration successful. Your Alumni ID is " +
-                        result.alumniId +
-                        ". Your registration is currently pending department approval.",
-                        "success"
-                    );
-
-
-                    alumniRegistrationForm.reset();
-
-
-                    /*
-                     * Restore default country after reset.
-                     */
-
-                    const countryField =
-                        document.getElementById(
-                            "currentCountry"
-                        );
-
-
-                    if (countryField) {
-
-                        countryField.value =
-                            "India";
-
-                    }
-
-
-                    /*
-                     * Scroll to confirmation message.
-                     */
-
-                    if (messageElement) {
-
-                        messageElement.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center"
-                        });
-
-                    }
-
-
-                } else {
-
-                    showMessage(
-                        result.message ||
-                        "Registration could not be completed.",
-                        "error"
-                    );
-
-                }
-
-
-            } catch (error) {
-
-                console.error(
-                    "Alumni registration failed:",
-                    error
-                );
-
-
-                showMessage(
-                    "Unable to submit the registration right now. Please try again later.",
-                    "error"
-                );
-
-
-            } finally {
-
-                if (submitButton) {
-
-                    submitButton.disabled = false;
-
-                    submitButton.textContent =
-                        "Submit Alumni Registration";
-
-                }
-
-            }
-
-        }
-    );
-
-}
+      }
+    });
+
+    form.addEventListener('submit', function () {
+      submitted = true;
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+      }
+      showRegistrationStatus('loading', 'Submitting your registration securely...');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    setCurrentYear();
+    setupMobileNav();
+    setupDirectoryLinks();
+    setupSmoothAnchors();
+    setupRegistrationForm();
+  });
+})();
