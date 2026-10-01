@@ -14,15 +14,15 @@
 
 /*
  * IMPORTANT:
+ * Replace the URL below with your ORIGINAL Google Apps
+ * Script Web App URL ending in /exec.
  *
- * Replace the URL below with your actual
- * Google Apps Script Web App URL.
- *
- * The URL must end with /exec
+ * Example:
+ * https://script.google.com/macros/s/XXXXXXXXXXXX/exec
  */
 
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbywtAgQ05-QIByYCgaQS1cn0PtCXRGKGIAO6AZP2oeVhPNLetWbsQxHIazbK5V0gEgEdg/exec";
+    "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";
 
 
 /* =====================================================
@@ -57,7 +57,7 @@ if (menuButton && navigation) {
 
 
 /* =====================================================
-   CLOSE MOBILE MENU AFTER CLICKING LINK
+   CLOSE MOBILE MENU AFTER CLICKING A LINK
    ===================================================== */
 
 const navigationLinks =
@@ -66,31 +66,35 @@ const navigationLinks =
     );
 
 
-navigationLinks.forEach(function (link) {
+navigationLinks.forEach(
+    function (link) {
 
-    link.addEventListener(
-        "click",
-        function () {
+        link.addEventListener(
+            "click",
+            function () {
 
-            if (navigation) {
+                if (navigation) {
 
-                navigation.classList.remove("active");
+                    navigation.classList.remove(
+                        "active"
+                    );
+
+                }
+
+                if (menuButton) {
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
 
             }
+        );
 
-            if (menuButton) {
-
-                menuButton.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-            }
-
-        }
-    );
-
-});
+    }
+);
 
 
 /* =====================================================
@@ -110,21 +114,8 @@ if (yearElement) {
 
 
 /* =====================================================
-   BACKEND CONNECTION TEST
+   TEST GOOGLE APPS SCRIPT BACKEND
    ===================================================== */
-
-/**
- * Tests communication between:
- *
- * GitHub Pages
- *       ↓
- * Google Apps Script
- *       ↓
- * Google Sheets
- *
- * This function will be used only during
- * Step 6 testing.
- */
 
 async function testBackendConnection() {
 
@@ -139,9 +130,12 @@ async function testBackendConnection() {
         );
 
         return {
+
             success: false,
+
             message:
                 "Backend URL is not configured."
+
         };
 
     }
@@ -183,7 +177,7 @@ async function testBackendConnection() {
         if (data.success) {
 
             console.log(
-                "✓ Backend connection successful."
+                "✓ Aero Alumni Connect backend connection successful."
             );
 
         } else {
@@ -202,14 +196,18 @@ async function testBackendConnection() {
     } catch (error) {
 
         console.error(
-            "Backend connection failed:",
+            "Aero Alumni Connect backend connection failed:",
             error
         );
 
 
         return {
+
             success: false,
-            message: error.message
+
+            message:
+                error.message
+
         };
 
     }
@@ -218,7 +216,7 @@ async function testBackendConnection() {
 
 
 /* =====================================================
-   RUN BACKEND CONNECTION TEST
+   START BACKEND CONNECTION TEST
    ===================================================== */
 
 testBackendConnection();
