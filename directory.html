@@ -1145,10 +1145,8 @@
 
 
     /* =================================================
-   CREATE JSONP REQUEST
+   CREATE JSONP REQUEST WITH AUTOMATIC RETRY
    ================================================= */
-
-let jsonpScript = null;
 
 function jsonpRequest(
     url,
@@ -1156,141 +1154,241 @@ function jsonpRequest(
     timeoutMilliseconds
 ) {
 
-    const callbackName =
-        "aeroAlumniDirectoryCallback";
+    const maxAttempts = 4;
 
-    let completed = false;
+    let attempt = 0;
 
-    function cleanup() {
+    let finished = false;
 
-        if (jsonpScript) {
 
-            if (jsonpScript.parentNode) {
+    function makeRequest() {
 
-                jsonpScript.parentNode.removeChild(
-                    jsonpScript
+        if (finished) {
+            return;
+        }
+
+
+        attempt++;
+
+
+        const callbackName =
+            "aeroAlumniCallback_" +
+            Date.now() +
+            "_" +
+            attempt;
+
+
+        const script =
+            document.createElement(
+                "script"
+            );
+
+
+        let timeoutId = null;
+
+
+        function cleanup() {
+
+            if (timeoutId) {
+
+                clearTimeout(
+                    timeoutId
                 );
 
             }
 
-            jsonpScript = null;
+
+            if (
+                script.parentNode
+            ) {
+
+                script.parentNode.removeChild(
+                    script
+                );
+
+            }
+
+
+            try {
+
+                delete window[
+                    callbackName
+                ];
+
+            } catch (error) {
+
+                window[
+                    callbackName
+                ] = undefined;
+
+            }
 
         }
 
-        try {
 
-            delete window[
-                callbackName
-            ];
+        window[
+            callbackName
+        ] =
+            function(data) {
 
-        } catch (error) {
-
-            window[
-                callbackName
-            ] = undefined;
-
-        }
-
-    }
-
-
-    const timeout =
-        setTimeout(
-            function() {
-
-                if (completed) {
+                if (finished) {
                     return;
                 }
 
-                completed = true;
+
+                finished = true;
+
 
                 cleanup();
+
+
+                callback(
+                    data,
+                    null
+                );
+
+            };
+
+
+        script.onerror =
+            function() {
+
+                if (finished) {
+                    return;
+                }
+
+
+                cleanup();
+
+
+                if (
+                    attempt <
+                    maxAttempts
+                ) {
+
+                    console.warn(
+                        "Directory request failed. Retrying attempt " +
+                        (attempt + 1) +
+                        " of " +
+                        maxAttempts +
+                        "..."
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            makeRequest();
+
+                        },
+                        2000
+                    );
+
+
+                    return;
+
+                }
+
+
+                finished = true;
+
 
                 callback(
                     null,
                     new Error(
-                        "Request timed out."
+                        "Unable to contact the directory server after " +
+                        maxAttempts +
+                        " attempts."
                     )
                 );
 
-            },
-            timeoutMilliseconds || 15000
-        );
+            };
 
 
-    window[
-        callbackName
-    ] =
-        function(data) {
+        const separator =
+            url.indexOf("?") >= 0
+                ? "&"
+                : "?";
 
-            if (completed) {
-                return;
-            }
 
-            completed = true;
-
-            clearTimeout(timeout);
-
-            cleanup();
-
-            callback(
-                data,
-                null
+        script.src =
+            url +
+            separator +
+            "callback=" +
+            encodeURIComponent(
+                callbackName
             );
 
-        };
+
+        script.async = true;
 
 
-    jsonpScript =
-        document.createElement(
-            "script"
+        document.body.appendChild(
+            script
         );
 
 
-    jsonpScript.async = true;
+        timeoutId =
+            setTimeout(
+                function() {
+
+                    if (finished) {
+                        return;
+                    }
 
 
-    jsonpScript.onerror =
-        function() {
+                    cleanup();
 
-            if (completed) {
-                return;
-            }
 
-            completed = true;
+                    if (
+                        attempt <
+                        maxAttempts
+                    ) {
 
-            clearTimeout(timeout);
+                        console.warn(
+                            "Directory request timed out. Retrying attempt " +
+                            (attempt + 1) +
+                            " of " +
+                            maxAttempts +
+                            "..."
+                        );
 
-            cleanup();
 
-            callback(
-                null,
-                new Error(
-                    "Unable to contact the directory server."
-                )
+                        setTimeout(
+                            function() {
+
+                                makeRequest();
+
+                            },
+                            2000
+                        );
+
+
+                        return;
+
+                    }
+
+
+                    finished = true;
+
+
+                    callback(
+                        null,
+                        new Error(
+                            "Directory request timed out after " +
+                            maxAttempts +
+                            " attempts."
+                        )
+                    );
+
+                },
+                timeoutMilliseconds || 15000
             );
 
-        };
+    }
 
 
-    const separator =
-        url.indexOf("?") >= 0
-            ? "&"
-            : "?";
-
-
-    jsonpScript.src =
-        url +
-        separator +
-        "callback=" +
-        encodeURIComponent(
-            callbackName
-        );
-
-
-    document.body.appendChild(
-        jsonpScript
-    );
+    makeRequest();
 
 }
 
