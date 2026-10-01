@@ -220,3 +220,263 @@ async function testBackendConnection() {
    ===================================================== */
 
 testBackendConnection();
+
+/* =====================================================
+   ALUMNI REGISTRATION
+   ===================================================== */
+
+const alumniRegistrationForm =
+    document.getElementById(
+        "alumniRegistrationForm"
+    );
+
+
+if (alumniRegistrationForm) {
+
+    alumniRegistrationForm.addEventListener(
+        "submit",
+        async function (event) {
+
+            event.preventDefault();
+
+
+            const messageElement =
+                document.getElementById(
+                    "registrationMessage"
+                );
+
+
+            const submitButton =
+                document.getElementById(
+                    "registrationSubmit"
+                );
+
+
+            function showMessage(
+                message,
+                type
+            ) {
+
+                if (!messageElement) {
+                    return;
+                }
+
+                messageElement.textContent =
+                    message;
+
+                messageElement.className =
+                    "form-message " +
+                    type;
+
+            }
+
+
+            /* -----------------------------------------
+               BASIC FRONTEND VALIDATION
+               ----------------------------------------- */
+
+            if (
+                !alumniRegistrationForm.checkValidity()
+            ) {
+
+                alumniRegistrationForm.reportValidity();
+
+                return;
+
+            }
+
+
+            /* -----------------------------------------
+               DISABLE BUTTON
+               ----------------------------------------- */
+
+            if (submitButton) {
+
+                submitButton.disabled = true;
+
+                submitButton.textContent =
+                    "Submitting...";
+
+            }
+
+
+            showMessage(
+                "Submitting your registration. Please wait...",
+                "success"
+            );
+
+
+            try {
+
+                const formData =
+                    new FormData(
+                        alumniRegistrationForm
+                    );
+
+
+                formData.append(
+                    "action",
+                    "registerAlumni"
+                );
+
+
+                /*
+                 * Convert FormData to URL encoded data.
+                 *
+                 * This keeps the request simple and avoids
+                 * unnecessary browser CORS preflight requests.
+                 */
+
+                const body =
+                    new URLSearchParams();
+
+
+                formData.forEach(
+                    function (
+                        value,
+                        key
+                    ) {
+
+                        body.append(
+                            key,
+                            value
+                        );
+
+                    }
+                );
+
+
+                const response =
+                    await fetch(
+                        API_URL,
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded;charset=UTF-8"
+
+                            },
+
+                            body:
+                                body.toString(),
+
+                            cache: "no-store"
+
+                        }
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP error: " +
+                        response.status
+                    );
+
+                }
+
+
+                const result =
+                    await response.json();
+
+
+                console.log(
+                    "Alumni Registration Response:",
+                    result
+                );
+
+
+                /* -------------------------------------
+                   SUCCESS
+                   ------------------------------------- */
+
+                if (result.success) {
+
+                    showMessage(
+                        "Registration successful. Your Alumni ID is " +
+                        result.alumniId +
+                        ". Your registration is currently pending department approval.",
+                        "success"
+                    );
+
+
+                    alumniRegistrationForm.reset();
+
+
+                    /*
+                     * Restore default country after reset.
+                     */
+
+                    const countryField =
+                        document.getElementById(
+                            "currentCountry"
+                        );
+
+
+                    if (countryField) {
+
+                        countryField.value =
+                            "India";
+
+                    }
+
+
+                    /*
+                     * Scroll to confirmation message.
+                     */
+
+                    if (messageElement) {
+
+                        messageElement.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                    }
+
+
+                } else {
+
+                    showMessage(
+                        result.message ||
+                        "Registration could not be completed.",
+                        "error"
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                console.error(
+                    "Alumni registration failed:",
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to submit the registration right now. Please try again later.",
+                    "error"
+                );
+
+
+            } finally {
+
+                if (submitButton) {
+
+                    submitButton.disabled = false;
+
+                    submitButton.textContent =
+                        "Submit Alumni Registration";
+
+                }
+
+            }
+
+        }
+    );
+
+}
