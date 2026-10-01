@@ -1,125 +1,132 @@
 /* =========================================================
-   AERO ALUMNI CONNECT - SHARED FRONTEND JAVASCRIPT
-   GitHub Pages frontend
+   VIT AERO ALUMNI CONNECT
+   Shared GitHub Pages JavaScript
    ========================================================= */
 
-const AERO_CONFIG = {
-  apiUrl: 'https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec',
-  directoryUrl: 'https://script.google.com/macros/s/AKfycbx-qLt5rX69dOtG3u3u--lDVOsiOVQikvCJDTOS3pNAK3_uOm-BlNDXhCFDY-OdDsln_Q/exec?action=directoryPage'
+const AAC_CONFIG = {
+  portalName: 'VIT Aero Alumni Connect',
+  apiUrl:
+    'https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec',
+  githubBase:
+    'https://sarathkumarsebastin.github.io/aero-alumni-connect/'
 };
 
-(function () {
-  'use strict';
+document.addEventListener('DOMContentLoaded', function () {
+  setYear();
+  initMobileNavigation();
+  initRegistrationForm();
+  initDirectoryLink();
+});
 
-  function byId(id) {
-    return document.getElementById(id);
-  }
 
-  function setCurrentYear() {
-    document.querySelectorAll('[data-current-year]').forEach(function (el) {
-      el.textContent = String(new Date().getFullYear());
-    });
-  }
-
-  function setupMobileNav() {
-    var button = byId('mobileMenuButton');
-    var nav = byId('siteNav');
-    if (!button || !nav) return;
-
-    button.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      button.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-
-    nav.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        nav.classList.remove('is-open');
-        button.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-
-  function setupDirectoryLinks() {
-    document.querySelectorAll('[data-directory-link]').forEach(function (link) {
-      link.href = AERO_CONFIG.directoryUrl;
-    });
-  }
-
-  function setupSmoothAnchors() {
-    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
-      link.addEventListener('click', function (event) {
-        var targetId = link.getAttribute('href');
-        if (!targetId || targetId === '#') return;
-        var target = document.querySelector(targetId);
-        if (!target) return;
-        event.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        history.replaceState(null, '', targetId);
-      });
-    });
-  }
-
-  function showRegistrationStatus(type, message) {
-    var box = byId('registrationStatus');
-    if (!box) return;
-    box.className = 'form-status ' + type;
-    box.textContent = message;
-    box.hidden = false;
-  }
-
-  function setupRegistrationForm() {
-    var form = byId('registrationForm');
-    var iframe = byId('registrationResponseFrame');
-    if (!form || !iframe) return;
-
-    var submitted = false;
-    var submitButton = form.querySelector('button[type="submit"]');
-    var originalButtonText = submitButton ? submitButton.textContent : 'Submit Registration';
-
-    window.addEventListener('message', function (event) {
-      var data = event.data;
-      if (!data || data.type !== 'aeroAlumniRegistration') return;
-      if (!submitted) return;
-
-      var payload = data.payload || {};
-      submitted = false;
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-      }
-
-      if (payload.success) {
-        showRegistrationStatus(
-          'success',
-          'Registration submitted successfully. Your Alumni ID is ' +
-          (payload.alumniId || 'pending') +
-          '. Your profile will remain private until it is reviewed and approved.'
-        );
-        form.reset();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        showRegistrationStatus(
-          'error',
-          payload.message || 'Registration could not be submitted. Please check the form and try again.'
-        );
-      }
-    });
-
-    form.addEventListener('submit', function () {
-      submitted = true;
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
-      }
-      showRegistrationStatus('loading', 'Submitting your registration securely...');
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    setCurrentYear();
-    setupMobileNav();
-    setupDirectoryLinks();
-    setupSmoothAnchors();
-    setupRegistrationForm();
+function setYear() {
+  document.querySelectorAll('[data-current-year]').forEach(function (el) {
+    el.textContent = new Date().getFullYear();
   });
-})();
+}
+
+
+function initMobileNavigation() {
+  const toggle = document.querySelector('[data-menu-toggle]');
+  const nav = document.querySelector('[data-mobile-nav]');
+
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener('click', function () {
+    const open = nav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  nav.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      nav.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+
+function initDirectoryLink() {
+  document.querySelectorAll('[data-directory-link]').forEach(function (link) {
+    link.href = AAC_CONFIG.apiUrl + '?action=directoryPage';
+  });
+}
+
+
+function initRegistrationForm() {
+  const form = document.getElementById('alumniRegistrationForm');
+  if (!form) return;
+
+  const statusBox = document.getElementById('registrationStatus');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const frame = document.getElementById('registrationFrame');
+
+  window.addEventListener('message', function (event) {
+    if (event.origin !== 'https://sarathkumarsebastin.github.io') return;
+
+    const data = event.data;
+    if (!data || typeof data !== 'object') return;
+
+    if (data.success) {
+      showStatus(
+        statusBox,
+        'success',
+        (data.message || 'Registration submitted successfully.') +
+          (data.alumniId ? ' Your Alumni ID is ' + data.alumniId + '.' : '')
+      );
+
+      form.reset();
+      setSubmitState(submitButton, false);
+    } else {
+      showStatus(
+        statusBox,
+        'error',
+        data.message || 'Registration could not be submitted.'
+      );
+      setSubmitState(submitButton, false);
+    }
+  });
+
+  form.addEventListener('submit', function () {
+    clearStatus(statusBox);
+    setSubmitState(submitButton, true);
+  });
+
+  if (frame) {
+    frame.addEventListener('load', function () {
+      // The actual result arrives through postMessage.
+      // This listener intentionally does not display an error.
+    });
+  }
+}
+
+
+function setSubmitState(button, busy) {
+  if (!button) return;
+
+  button.disabled = busy;
+  button.dataset.originalText =
+    button.dataset.originalText || button.textContent;
+
+  button.textContent = busy
+    ? 'Submitting...'
+    : button.dataset.originalText;
+}
+
+
+function showStatus(box, type, message) {
+  if (!box) return;
+
+  box.hidden = false;
+  box.className = 'alert alert-' + type;
+  box.textContent = message;
+}
+
+
+function clearStatus(box) {
+  if (!box) return;
+
+  box.hidden = true;
+  box.className = 'alert';
+  box.textContent = '';
+}
