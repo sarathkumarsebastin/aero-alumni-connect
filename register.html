@@ -16,13 +16,609 @@
 
     <meta
         name="description"
-        content="Alumni registration for the Department of Aerospace Engineering, School of Mechanical Engineering, VIT Bhopal University."
+        content="Alumni registration for the Department of Aerospace Engineering, VIT Bhopal University."
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <style>
+
+        /* =================================================
+           PAGE RESET
+           ================================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            background: #f4f7fb;
+            color: #1d2939;
+            line-height: 1.6;
+        }
+
+
+        /* =================================================
+           HEADER
+           ================================================= */
+
+        .registration-header {
+            background: #123b5d;
+            color: white;
+            padding: 15px 25px;
+        }
+
+        .registration-header-inner {
+            max-width: 1150px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        .registration-brand {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            text-decoration: none;
+            color: white;
+        }
+
+        .registration-logo {
+            width: 100px;
+            height: 70px;
+
+            background: #123b5d;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 6px;
+        }
+
+        .registration-logo img {
+            max-width: 95px;
+            max-height: 65px;
+            width: auto;
+            height: auto;
+            display: block;
+        }
+
+        .registration-brand-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .registration-department {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .registration-school {
+            font-size: 0.92rem;
+        }
+
+        .registration-university {
+            font-size: 0.88rem;
+            opacity: 0.9;
+        }
+
+
+        /* =================================================
+           BACK BUTTON
+           ================================================= */
+
+        .back-button {
+            display: inline-block;
+
+            padding: 10px 18px;
+
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 7px;
+
+            color: white;
+            text-decoration: none;
+
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .back-button:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+
+        /* =================================================
+           MAIN
+           ================================================= */
+
+        .registration-main {
+            padding: 55px 20px 70px;
+        }
+
+        .registration-wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+
+        /* =================================================
+           PAGE TITLE
+           ================================================= */
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title .kicker {
+            margin: 0 0 8px;
+
+            color: #1769aa;
+
+            font-size: 0.85rem;
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+        }
+
+        .page-title h1 {
+            margin: 0 0 12px;
+
+            color: #123b5d;
+
+            font-size: 2.4rem;
+        }
+
+        .page-title p {
+            max-width: 760px;
+            margin: 0 auto;
+
+            color: #52606d;
+        }
+
+
+        /* =================================================
+           INFORMATION NOTICE
+           ================================================= */
+
+        .notice {
+            background: #eaf4ff;
+
+            border-left: 5px solid #1769aa;
+
+            border-radius: 8px;
+
+            padding: 18px 22px;
+
+            margin-bottom: 25px;
+        }
+
+        .notice-title {
+            margin: 0 0 7px;
+
+            font-weight: 700;
+            color: #123b5d;
+        }
+
+        .notice p {
+            margin: 5px 0;
+        }
+
+
+        /* =================================================
+           FORM CARD
+           ================================================= */
+
+        .registration-form {
+            background: white;
+
+            border-radius: 12px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 8px 28px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* =================================================
+           FIELDSETS
+           ================================================= */
+
+        .registration-form fieldset {
+            border: 1px solid #d9e1e8;
+
+            border-radius: 9px;
+
+            padding: 24px;
+
+            margin: 0 0 28px;
+        }
+
+        .registration-form legend {
+            padding: 0 10px;
+
+            color: #123b5d;
+
+            font-size: 1.15rem;
+
+            font-weight: 700;
+        }
+
+
+        /* =================================================
+           FORM GRID
+           ================================================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            margin-bottom: 7px;
+
+            font-weight: 600;
+
+            color: #344054;
+        }
+
+        .required {
+            color: #c62828;
+        }
+
+
+        /* =================================================
+           INPUTS
+           ================================================= */
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 12px 13px;
+
+            border: 1px solid #cbd5df;
+
+            border-radius: 7px;
+
+            background: white;
+
+            color: #1d2939;
+
+            font-family: inherit;
+
+            font-size: 0.95rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+
+            outline: none;
+
+            border-color: #1769aa;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(23, 105, 170, 0.12);
+        }
+
+
+        /* =================================================
+           CHECKBOXES
+           ================================================= */
+
+        .fieldset-description {
+            margin-top: 0;
+
+            color: #667085;
+        }
+
+        .checkbox-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
+            gap: 13px;
+        }
+
+        .checkbox-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            padding: 12px;
+
+            background: #f8fafc;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+
+            margin-top: 5px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* =================================================
+           CONSENT
+           ================================================= */
+
+        .consent-item {
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+
+            padding: 15px;
+
+            background: #f8fafc;
+
+            border-radius: 8px;
+        }
+
+        .consent-item input {
+
+            margin-top: 5px;
+
+            flex-shrink: 0;
+        }
+
+        .consent-required {
+            color: #c62828;
+        }
+
+
+        /* =================================================
+           HONEYPOT
+           ================================================= */
+
+        .honeypot {
+
+            position: absolute;
+
+            left: -10000px;
+
+            width: 1px;
+            height: 1px;
+
+            overflow: hidden;
+        }
+
+
+        /* =================================================
+           MESSAGE
+           ================================================= */
+
+        .form-message {
+
+            display: none;
+
+            padding: 15px 18px;
+
+            margin-bottom: 20px;
+
+            border-radius: 8px;
+
+            line-height: 1.5;
+        }
+
+        .form-message.success {
+
+            display: block;
+
+            background: #eaf7ee;
+
+            border: 1px solid #a8d5b5;
+
+            color: #245b35;
+        }
+
+        .form-message.error {
+
+            display: block;
+
+            background: #fff0f0;
+
+            border: 1px solid #e2aaaa;
+
+            color: #8a1c1c;
+        }
+
+
+        /* =================================================
+           BUTTONS
+           ================================================= */
+
+        .form-actions {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+        }
+
+        .button {
+
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            border-radius: 7px;
+
+            font-family: inherit;
+
+            font-size: 0.95rem;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            border: none;
+        }
+
+        .button-primary {
+
+            background: #1769aa;
+
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: #125789;
+        }
+
+        .button-secondary {
+
+            background: white;
+
+            color: #1769aa;
+
+            border: 1px solid #1769aa;
+        }
+
+        .button-secondary:hover {
+            background: #eef6ff;
+        }
+
+        .button:disabled {
+
+            opacity: 0.6;
+
+            cursor: not-allowed;
+        }
+
+
+        /* =================================================
+           FOOTER
+           ================================================= */
+
+        .registration-footer {
+
+            background: #123b5d;
+
+            color: white;
+
+            padding: 25px 20px;
+
+            text-align: center;
+        }
+
+        .registration-footer p {
+            margin: 5px 0;
+        }
+
+
+        /* =================================================
+           MOBILE
+           ================================================= */
+
+        @media (max-width: 768px) {
+
+            .registration-header-inner {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .registration-brand {
+
+                align-items: flex-start;
+            }
+
+            .registration-main {
+
+                padding:
+                    35px 12px 50px;
+            }
+
+            .registration-form {
+
+                padding: 20px;
+            }
+
+            .registration-form fieldset {
+
+                padding: 18px;
+            }
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .form-group-full {
+
+                grid-column: auto;
+            }
+
+            .checkbox-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+
+                font-size: 2rem;
+            }
+
+        }
+
+    </style>
 
 </head>
 
@@ -30,39 +626,41 @@
 <body>
 
 
-<!-- ==================================================
+<!-- =====================================================
      HEADER
-     ================================================== -->
+     ===================================================== -->
 
-<header class="site-header">
+<header class="registration-header">
 
-    <div class="header-container">
+    <div class="registration-header-inner">
+
 
         <a
             href="index.html"
-            class="brand"
+            class="registration-brand"
         >
 
-            <div class="brand-logo">
+            <div class="registration-logo">
 
                 <img
                     src="https://vitbhopal.ac.in/wp-content/uploads/2020/01/logochhota.png"
-                    alt="VIT Bhopal University"
+                    alt="VIT Bhopal University logo"
                 >
 
             </div>
 
-            <div class="brand-text">
 
-                <div class="brand-department">
+            <div class="registration-brand-text">
+
+                <div class="registration-department">
                     Department of Aerospace Engineering
                 </div>
 
-                <div class="brand-school">
+                <div class="registration-school">
                     School of Mechanical Engineering (SMEC)
                 </div>
 
-                <div class="brand-university">
+                <div class="registration-university">
                     VIT Bhopal University
                 </div>
 
@@ -73,823 +671,813 @@
 
         <a
             href="index.html#home"
-            class="btn btn-secondary"
+            class="back-button"
         >
             ← Back to Home
         </a>
+
 
     </div>
 
 </header>
 
 
-<!-- ==================================================
-     REGISTRATION PAGE
-     ================================================== -->
+<!-- =====================================================
+     MAIN CONTENT
+     ===================================================== -->
 
-<main>
+<main class="registration-main">
 
-    <section class="registration-section">
-
-        <div class="registration-container">
+    <div class="registration-wrapper">
 
 
-            <div class="section-heading">
+        <div class="page-title">
 
-                <p class="section-kicker">
-                    ALUMNI NETWORK
-                </p>
+            <p class="kicker">
+                AERO ALUMNI CONNECT
+            </p>
 
-                <h1>
-                    Alumni Registration
-                </h1>
+            <h1>
+                Alumni Registration
+            </h1>
 
-                <p>
-                    Join the Aero Alumni Connect network of the
-                    Department of Aerospace Engineering,
-                    School of Mechanical Engineering (SMEC),
-                    VIT Bhopal University.
-                </p>
+            <p>
+                Join the alumni network of the Department of
+                Aerospace Engineering, School of Mechanical
+                Engineering (SMEC), VIT Bhopal University.
+            </p>
 
-            </div>
-
-
-            <!-- ==========================================
-                 INFORMATION NOTICE
-                 ========================================== -->
-
-            <div class="registration-notice">
-
-                <strong>
-                    Before you register
-                </strong>
-
-                <p>
-                    Please enter your details accurately.
-                    Your registration will initially be reviewed
-                    by the department and will remain private
-                    until approved.
-                </p>
-
-                <p>
-                    Your personal email and mobile number will
-                    not be displayed in the public alumni
-                    directory by default.
-                </p>
-
-            </div>
+        </div>
 
 
-            <!-- ==========================================
-                 REGISTRATION FORM
-                 ========================================== -->
+        <!-- =================================================
+             NOTICE
+             ================================================= -->
 
-            <form
-                id="alumniRegistrationForm"
-                class="registration-form"
-                novalidate
+        <div class="notice">
+
+            <p class="notice-title">
+                Before you register
+            </p>
+
+            <p>
+                Please enter your information accurately.
+                Your registration will initially be reviewed
+                by the department.
+            </p>
+
+            <p>
+                Your profile will remain private by default.
+                Personal email and mobile number will not be
+                displayed in a public alumni directory.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM
+             ================================================= -->
+
+        <form
+            id="alumniRegistrationForm"
+            class="registration-form"
+            novalidate
+        >
+
+
+            <!-- SPAM PROTECTION -->
+
+            <div
+                class="honeypot"
+                aria-hidden="true"
             >
 
+                <label>
+                    Website
+                </label>
 
-                <!-- ======================================
-                     HIDDEN SPAM FIELD
-                     ====================================== -->
-
-                <div
-                    class="form-honeypot"
-                    aria-hidden="true"
+                <input
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
                 >
 
-                    <label>
-                        Website
-                    </label>
+            </div>
 
-                    <input
-                        type="text"
-                        name="website"
-                        tabindex="-1"
-                        autocomplete="off"
-                    >
 
-                </div>
+            <!-- =================================================
+                 PERSONAL INFORMATION
+                 ================================================= -->
 
+            <fieldset>
 
-                <!-- ======================================
-                     PERSONAL INFORMATION
-                     ====================================== -->
+                <legend>
+                    Personal Information
+                </legend>
 
-                <fieldset>
 
-                    <legend>
-                        Personal Information
-                    </legend>
+                <div class="form-grid">
 
 
-                    <div class="form-grid">
+                    <div class="form-group">
 
-
-                        <div class="form-group">
-
-                            <label for="fullName">
-                                Full Name
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                id="fullName"
-                                name="fullName"
-                                required
-                                autocomplete="name"
-                                placeholder="Enter your full name"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="registrationNo">
-                                University Registration Number
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="text"
-                                id="registrationNo"
-                                name="registrationNo"
-                                required
-                                placeholder="Example: 20BXA0001"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="graduationYear">
-                                Graduation Year
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="number"
-                                id="graduationYear"
-                                name="graduationYear"
-                                required
-                                min="1950"
-                                max="2036"
-                                placeholder="Example: 2024"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="degree">
-                                Degree
-                                <span>*</span>
-                            </label>
-
-                            <select
-                                id="degree"
-                                name="degree"
-                                required
-                            >
-
-                                <option value="">
-                                    Select degree
-                                </option>
-
-                                <option value="B.Tech Aerospace Engineering">
-                                    B.Tech Aerospace Engineering
-                                </option>
-
-                                <option value="M.Tech Aerospace Engineering">
-                                    M.Tech Aerospace Engineering
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="personalEmail">
-                                Personal Email
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="email"
-                                id="personalEmail"
-                                name="personalEmail"
-                                required
-                                autocomplete="email"
-                                placeholder="your@email.com"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="mobileNumber">
-                                Mobile Number
-                                <span>*</span>
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="mobileNumber"
-                                name="mobileNumber"
-                                required
-                                autocomplete="tel"
-                                placeholder="Enter mobile number"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="whatsappNumber">
-                                WhatsApp Number
-                            </label>
-
-                            <input
-                                type="tel"
-                                id="whatsappNumber"
-                                name="whatsappNumber"
-                                placeholder="Optional"
-                            >
-
-                        </div>
-
-                    </div>
-
-                </fieldset>
-
-
-                <!-- ======================================
-                     CURRENT PROFESSIONAL INFORMATION
-                     ====================================== -->
-
-                <fieldset>
-
-                    <legend>
-                        Current Professional Information
-                    </legend>
-
-
-                    <div class="form-grid">
-
-
-                        <div class="form-group">
-
-                            <label for="currentStatus">
-                                Current Status
-                            </label>
-
-                            <select
-                                id="currentStatus"
-                                name="currentStatus"
-                            >
-
-                                <option value="">
-                                    Select status
-                                </option>
-
-                                <option value="Employed">
-                                    Employed
-                                </option>
-
-                                <option value="Entrepreneur">
-                                    Entrepreneur
-                                </option>
-
-                                <option value="Higher Studies">
-                                    Higher Studies
-                                </option>
-
-                                <option value="Research">
-                                    Research
-                                </option>
-
-                                <option value="Government Service">
-                                    Government Service
-                                </option>
-
-                                <option value="Seeking Opportunities">
-                                    Seeking Opportunities
-                                </option>
-
-                                <option value="Other">
-                                    Other
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="organization">
-                                Organization / University
-                            </label>
-
-                            <input
-                                type="text"
-                                id="organization"
-                                name="organization"
-                                placeholder="Current organization or university"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="designation">
-                                Designation / Role
-                            </label>
-
-                            <input
-                                type="text"
-                                id="designation"
-                                name="designation"
-                                placeholder="Your current designation"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="industrySector">
-                                Industry Sector
-                            </label>
-
-                            <input
-                                type="text"
-                                id="industrySector"
-                                name="industrySector"
-                                placeholder="Example: Aerospace, Defence, IT"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="currentCity">
-                                Current City
-                            </label>
-
-                            <input
-                                type="text"
-                                id="currentCity"
-                                name="currentCity"
-                                placeholder="City"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="currentCountry">
-                                Current Country
-                            </label>
-
-                            <input
-                                type="text"
-                                id="currentCountry"
-                                name="currentCountry"
-                                value="India"
-                                placeholder="Country"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group form-group-full">
-
-                            <label for="technicalExpertise">
-                                Technical Expertise
-                            </label>
-
-                            <textarea
-                                id="technicalExpertise"
-                                name="technicalExpertise"
-                                rows="3"
-                                placeholder="Example: Aircraft Design, CFD, Propulsion, Avionics"
-                            ></textarea>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="higherStudies">
-                                Higher Studies
-                            </label>
-
-                            <input
-                                type="text"
-                                id="higherStudies"
-                                name="higherStudies"
-                                placeholder="Degree / Institution / Field"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="professionalCertifications">
-                                Professional Certifications
-                            </label>
-
-                            <input
-                                type="text"
-                                id="professionalCertifications"
-                                name="professionalCertifications"
-                                placeholder="Optional"
-                            >
-
-                        </div>
-
-
-                        <div class="form-group form-group-full">
-
-                            <label for="linkedinUrl">
-                                LinkedIn Profile URL
-                            </label>
-
-                            <input
-                                type="url"
-                                id="linkedinUrl"
-                                name="linkedinUrl"
-                                placeholder="https://www.linkedin.com/in/..."
-                            >
-
-                        </div>
-
-                    </div>
-
-                </fieldset>
-
-
-                <!-- ======================================
-                     ALUMNI ENGAGEMENT
-                     ====================================== -->
-
-                <fieldset>
-
-                    <legend>
-                        How would you like to contribute?
-                    </legend>
-
-
-                    <p class="fieldset-description">
-                        Select the activities in which you may
-                        be interested. These preferences can be
-                        changed later.
-                    </p>
-
-
-                    <div class="checkbox-grid">
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="interestedMentoring"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Mentoring students
-                            </span>
-
+                        <label for="fullName">
+                            Full Name
+                            <span class="required">*</span>
                         </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="guestLecture"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Guest lectures
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="internshipSupport"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Internship support
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="placementSupport"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Placement support
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="projectGuidance"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Project guidance
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="researchCollaboration"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Research collaboration
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="technicalReview"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Technical review
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="industryConnect"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Industry connect
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="entrepreneurshipGuidance"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Entrepreneurship guidance
-                            </span>
-
-                        </label>
-
-
-                        <label class="checkbox-item">
-
-                            <input
-                                type="checkbox"
-                                name="departmentActivities"
-                                value="Yes"
-                            >
-
-                            <span>
-                                Department activities
-                            </span>
-
-                        </label>
-
-                    </div>
-
-                </fieldset>
-
-
-                <!-- ======================================
-                     COMMUNICATION
-                     ====================================== -->
-
-                <fieldset>
-
-                    <legend>
-                        Communication Preferences
-                    </legend>
-
-
-                    <div class="form-grid">
-
-
-                        <div class="form-group">
-
-                            <label for="communicationPreference">
-                                Preferred Communication
-                            </label>
-
-                            <select
-                                id="communicationPreference"
-                                name="communicationPreference"
-                            >
-
-                                <option value="">
-                                    Select preference
-                                </option>
-
-                                <option value="Email">
-                                    Email
-                                </option>
-
-                                <option value="WhatsApp">
-                                    WhatsApp
-                                </option>
-
-                                <option value="Phone">
-                                    Phone
-                                </option>
-
-                                <option value="Email and WhatsApp">
-                                    Email and WhatsApp
-                                </option>
-
-                            </select>
-
-                        </div>
-
-                    </div>
-
-                </fieldset>
-
-
-                <!-- ======================================
-                     CONSENT
-                     ====================================== -->
-
-                <fieldset>
-
-                    <legend>
-                        Confirmation
-                    </legend>
-
-
-                    <label class="consent-item">
 
                         <input
-                            type="checkbox"
-                            id="registrationConsent"
-                            name="registrationConsent"
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            required
+                            autocomplete="name"
+                            placeholder="Enter your full name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="registrationNo">
+                            University Registration Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="registrationNo"
+                            name="registrationNo"
+                            required
+                            placeholder="Example: 20BXA0001"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="graduationYear">
+                            Graduation Year
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="graduationYear"
+                            name="graduationYear"
+                            required
+                            min="1950"
+                            max="2036"
+                            placeholder="Example: 2024"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="degree">
+                            Degree
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            id="degree"
+                            name="degree"
                             required
                         >
 
+                            <option value="">
+                                Select degree
+                            </option>
+
+                            <option value="B.Tech Aerospace Engineering">
+                                B.Tech Aerospace Engineering
+                            </option>
+
+                            <option value="M.Tech Aerospace Engineering">
+                                M.Tech Aerospace Engineering
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="personalEmail">
+                            Personal Email
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="personalEmail"
+                            name="personalEmail"
+                            required
+                            autocomplete="email"
+                            placeholder="your@email.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="mobileNumber">
+                            Mobile Number
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobileNumber"
+                            name="mobileNumber"
+                            required
+                            autocomplete="tel"
+                            placeholder="Enter mobile number"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="whatsappNumber">
+                            WhatsApp Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="whatsappNumber"
+                            name="whatsappNumber"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+
+            <!-- =================================================
+                 PROFESSIONAL INFORMATION
+                 ================================================= -->
+
+            <fieldset>
+
+                <legend>
+                    Current Professional Information
+                </legend>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="currentStatus">
+                            Current Status
+                        </label>
+
+                        <select
+                            id="currentStatus"
+                            name="currentStatus"
+                        >
+
+                            <option value="">
+                                Select status
+                            </option>
+
+                            <option value="Employed">
+                                Employed
+                            </option>
+
+                            <option value="Entrepreneur">
+                                Entrepreneur
+                            </option>
+
+                            <option value="Higher Studies">
+                                Higher Studies
+                            </option>
+
+                            <option value="Research">
+                                Research
+                            </option>
+
+                            <option value="Government Service">
+                                Government Service
+                            </option>
+
+                            <option value="Seeking Opportunities">
+                                Seeking Opportunities
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="organization">
+                            Organization / University
+                        </label>
+
+                        <input
+                            type="text"
+                            id="organization"
+                            name="organization"
+                            placeholder="Current organization or university"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="designation">
+                            Designation / Role
+                        </label>
+
+                        <input
+                            type="text"
+                            id="designation"
+                            name="designation"
+                            placeholder="Your current designation"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="industrySector">
+                            Industry Sector
+                        </label>
+
+                        <input
+                            type="text"
+                            id="industrySector"
+                            name="industrySector"
+                            placeholder="Example: Aerospace, Defence, IT"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="currentCity">
+                            Current City
+                        </label>
+
+                        <input
+                            type="text"
+                            id="currentCity"
+                            name="currentCity"
+                            placeholder="City"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="currentCountry">
+                            Current Country
+                        </label>
+
+                        <input
+                            type="text"
+                            id="currentCountry"
+                            name="currentCountry"
+                            value="India"
+                            placeholder="Country"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group form-group-full">
+
+                        <label for="technicalExpertise">
+                            Technical Expertise
+                        </label>
+
+                        <textarea
+                            id="technicalExpertise"
+                            name="technicalExpertise"
+                            rows="3"
+                            placeholder="Example: Aircraft Design, CFD, Propulsion, Avionics"
+                        ></textarea>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="higherStudies">
+                            Higher Studies
+                        </label>
+
+                        <input
+                            type="text"
+                            id="higherStudies"
+                            name="higherStudies"
+                            placeholder="Degree / Institution / Field"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="professionalCertifications">
+                            Professional Certifications
+                        </label>
+
+                        <input
+                            type="text"
+                            id="professionalCertifications"
+                            name="professionalCertifications"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group form-group-full">
+
+                        <label for="linkedinUrl">
+                            LinkedIn Profile URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="linkedinUrl"
+                            name="linkedinUrl"
+                            placeholder="https://www.linkedin.com/in/..."
+                        >
+
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+
+            <!-- =================================================
+                 CONTRIBUTION
+                 ================================================= -->
+
+            <fieldset>
+
+                <legend>
+                    How would you like to contribute?
+                </legend>
+
+                <p class="fieldset-description">
+                    Select the activities in which you may
+                    be interested.
+                </p>
+
+
+                <div class="checkbox-grid">
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="interestedMentoring"
+                            value="Yes"
+                        >
+
                         <span>
-                            I confirm that the information provided
-                            above is accurate to the best of my
-                            knowledge and I consent to the Department
-                            of Aerospace Engineering using this
-                            information for alumni networking,
-                            departmental activities, and official
-                            alumni communication.
-                            <strong>*</strong>
+                            Mentoring students
                         </span>
 
                     </label>
 
-                </fieldset>
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="guestLecture"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Guest lectures
+                        </span>
+
+                    </label>
 
 
-                <!-- ======================================
-                     FORM STATUS
-                     ====================================== -->
+                    <label class="checkbox-item">
 
-                <div
-                    id="registrationMessage"
-                    class="form-message"
-                    role="status"
-                    aria-live="polite"
-                ></div>
+                        <input
+                            type="checkbox"
+                            name="internshipSupport"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Internship support
+                        </span>
+
+                    </label>
 
 
-                <!-- ======================================
-                     SUBMIT
-                     ====================================== -->
+                    <label class="checkbox-item">
 
-                <div class="form-actions">
+                        <input
+                            type="checkbox"
+                            name="placementSupport"
+                            value="Yes"
+                        >
 
-                    <button
-                        type="submit"
-                        id="registrationSubmit"
-                        class="btn btn-primary"
-                    >
-                        Submit Alumni Registration
-                    </button>
+                        <span>
+                            Placement support
+                        </span>
 
-                    <a
-                        href="index.html"
-                        class="btn btn-secondary"
-                    >
-                        Cancel
-                    </a>
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="projectGuidance"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Project guidance
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="researchCollaboration"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Research collaboration
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="technicalReview"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Technical review
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="industryConnect"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Industry connect
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="entrepreneurshipGuidance"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Entrepreneurship guidance
+                        </span>
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            name="departmentActivities"
+                            value="Yes"
+                        >
+
+                        <span>
+                            Department activities
+                        </span>
+
+                    </label>
+
 
                 </div>
 
+            </fieldset>
 
-            </form>
+
+            <!-- =================================================
+                 COMMUNICATION
+                 ================================================= -->
+
+            <fieldset>
+
+                <legend>
+                    Communication Preference
+                </legend>
 
 
-        </div>
+                <div class="form-grid">
 
-    </section>
+                    <div class="form-group">
+
+                        <label for="communicationPreference">
+                            Preferred Communication
+                        </label>
+
+                        <select
+                            id="communicationPreference"
+                            name="communicationPreference"
+                        >
+
+                            <option value="">
+                                Select preference
+                            </option>
+
+                            <option value="Email">
+                                Email
+                            </option>
+
+                            <option value="WhatsApp">
+                                WhatsApp
+                            </option>
+
+                            <option value="Phone">
+                                Phone
+                            </option>
+
+                            <option value="Email and WhatsApp">
+                                Email and WhatsApp
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </fieldset>
+
+
+            <!-- =================================================
+                 CONSENT
+                 ================================================= -->
+
+            <fieldset>
+
+                <legend>
+                    Confirmation
+                </legend>
+
+
+                <label class="consent-item">
+
+                    <input
+                        type="checkbox"
+                        id="registrationConsent"
+                        name="registrationConsent"
+                        required
+                    >
+
+                    <span>
+                        I confirm that the information provided
+                        above is accurate to the best of my
+                        knowledge and I consent to the Department
+                        of Aerospace Engineering using this
+                        information for alumni networking,
+                        departmental activities, and official
+                        alumni communication.
+                        <span class="consent-required">*</span>
+                    </span>
+
+                </label>
+
+            </fieldset>
+
+
+            <!-- =================================================
+                 MESSAGE
+                 ================================================= -->
+
+            <div
+                id="registrationMessage"
+                class="form-message"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- =================================================
+                 BUTTONS
+                 ================================================= -->
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    id="registrationSubmit"
+                    class="button button-primary"
+                >
+                    Submit Alumni Registration
+                </button>
+
+
+                <a
+                    href="index.html"
+                    class="button button-secondary"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
 
 </main>
 
 
-<!-- ==================================================
+<!-- =====================================================
      FOOTER
-     ================================================== -->
+     ===================================================== -->
 
-<footer class="site-footer">
+<footer class="registration-footer">
 
-    <div class="footer-container">
-
-        <p>
+    <p>
+        <strong>
             Aero Alumni Connect
-        </p>
+        </strong>
+    </p>
 
-        <p>
-            Department of Aerospace Engineering |
-            School of Mechanical Engineering (SMEC) |
-            VIT Bhopal University
-        </p>
+    <p>
+        Department of Aerospace Engineering |
+        School of Mechanical Engineering (SMEC) |
+        VIT Bhopal University
+    </p>
 
-        <p>
-            © <span id="currentYear"></span>
-            VIT Bhopal University
-        </p>
-
-    </div>
+    <p>
+        © 2026 VIT Bhopal University
+    </p>
 
 </footer>
 
 
-<script
-    src="app.js?v=3"
-></script>
+<!-- =====================================================
+     JAVASCRIPT
+     ===================================================== -->
+
+<script src="app.js?v=4"></script>
 
 
 </body>
