@@ -4,7 +4,35 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-02T10:48:48.058Z",
-  "count": 0,
-  "items": []
+  "generatedAt": "2026-10-02T10:48:52.356Z",
+  "count": 1,
+  "items": [
+    {
+      "Alumni_ID": "AAC-0001",
+      "Full_Name": "Sebastin",
+      "Graduation_Year": "2025",
+      "Degree": "Ph.D.",
+      "Current_City": "Tamilnadu",
+      "Current_Country": "India",
+      "LinkedIn_URL": "https://www.linkedin.com/in/dr-j-sarathkumar-sebastin-041162111/",
+      "Current_Status": "Researcher",
+      "Organization": "VIT Bhopal University",
+      "Designation": "Assistant Professor, Aerospace",
+      "Industry_Sector": "Aerospace Engineering",
+      "Technical_Expertise": "Aerospace Engineering",
+      "Higher_Studies": "Ph.D.",
+      "Professional_Certifications": "GATE 2013, GATE 2015, GATE 2026",
+      "Interested_Mentoring": "Yes",
+      "Guest_Lecture": "No",
+      "Internship_Support": "No",
+      "Placement_Support": "Yes",
+      "Project_Guidance": "Yes",
+      "Research_Collaboration": "No",
+      "Technical_Review": "Yes",
+      "Industry_Connect": "Yes",
+      "Entrepreneurship_Guidance": "No",
+      "Department_Activities": "No",
+      "Communication_Preference": "Any suitable channel"
+    }
+  ]
 }
