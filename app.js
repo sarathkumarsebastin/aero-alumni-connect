@@ -11,12 +11,12 @@
 
 const AAC_CONFIG = {
   portalName: 'VIT Aero Alumni Connect',
-  apiUrl: 'https://script.google.com/macros/s/AKfycbznZGMhrKljT33DuwKFADn_caJxnQXC0DgMuGA9q63g-jn9gzm1AALZbN7fzaqUwgjyCA/exec',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbwYyPW2_lJM9gwf0CqluTGfk8e7RhC48Wus1c19c8U0-WZAQU9mv28GKsJlUgh2KgV2OA/exec',
 
   // Primary source: raw GitHub content. This avoids GitHub Pages deployment
   // caching and makes Sheet -> GitHub publication visible immediately.
   rawDataBase:
-    'https://raw.githubusercontent.com/sarathkumarsebastin/aero-alumni-connect/main/data/',
+    'https://raw.githubusercontent.com/vitaeroalumni/aero-alumni-connect/main/data/',
 
   // Fallback source if raw GitHub is temporarily unavailable.
   pagesDataBase: './data/',
