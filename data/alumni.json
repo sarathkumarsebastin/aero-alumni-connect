@@ -4,8 +4,8 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-02T10:48:52.356Z",
-  "count": 1,
+  "generatedAt": "2026-10-02T10:51:44.855Z",
+  "count": 2,
   "items": [
     {
       "Alumni_ID": "AAC-0001",
@@ -33,6 +33,33 @@
       "Entrepreneurship_Guidance": "No",
       "Department_Activities": "No",
       "Communication_Preference": "Any suitable channel"
+    },
+    {
+      "Alumni_ID": "AAC-0002",
+      "Full_Name": "Rishya",
+      "Graduation_Year": "2024",
+      "Degree": "M.Tech Aerospace Engineering",
+      "Current_City": "Madhya Pradesh",
+      "Current_Country": "India",
+      "LinkedIn_URL": "https://www.linkedin.com/in/dr-j-sarathkumar-sebastin-041162111/",
+      "Current_Status": "Working Professional",
+      "Organization": "KARE",
+      "Designation": "Asst Professor",
+      "Industry_Sector": "Aerospace Engineering",
+      "Technical_Expertise": "Aerospace Engineering",
+      "Higher_Studies": "Aerospace Engineering",
+      "Professional_Certifications": "Aerospace Engineering",
+      "Interested_Mentoring": "No",
+      "Guest_Lecture": "Yes",
+      "Internship_Support": "No",
+      "Placement_Support": "No",
+      "Project_Guidance": "Yes",
+      "Research_Collaboration": "Yes",
+      "Technical_Review": "No",
+      "Industry_Connect": "Yes",
+      "Entrepreneurship_Guidance": "Yes",
+      "Department_Activities": "No",
+      "Communication_Preference": "WhatsApp"
     }
   ]
 }
