@@ -4,38 +4,7 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-01T13:27:19.578Z",
-  "count": 2,
-  "items": [
-    {
-      "Achievement_ID": "ACH-0001",
-      "Alumni_ID": "AAC-0001",
-      "Alumni_Name": "Aero Alumni Test User",
-      "Graduation_Year": "2024",
-      "Title": "Outstanding Aerospace Engineering Project",
-      "Category": "Academic",
-      "Description": "Successfully completed an advanced aerospace engineering project involving UAV design and aerodynamic analysis.",
-      "Achievement_Date": "2026-05-15",
-      "External_URL": "",
-      "Featured": "Yes",
-      "Status": "Published",
-      "Posted_Date": "2026-10-01",
-      "Last_Updated": "2026-10-01"
-    },
-    {
-      "Achievement_ID": "ACH-0002",
-      "Alumni_ID": "AAC-0002",
-      "Alumni_Name": "Aarav Sharma",
-      "Graduation_Year": "2023",
-      "Title": "Research Publication in Aerospace Engineering",
-      "Category": "Research",
-      "Description": "Contributed to a technical research publication related to computational fluid dynamics and aerospace applications.",
-      "Achievement_Date": "2026-07-20",
-      "External_URL": "https://example.com/publication",
-      "Featured": "Yes",
-      "Status": "Published",
-      "Posted_Date": "2026-10-01",
-      "Last_Updated": "2026-10-01"
-    }
-  ]
+  "generatedAt": "2026-10-02T06:29:41.532Z",
+  "count": 0,
+  "items": []
 }
