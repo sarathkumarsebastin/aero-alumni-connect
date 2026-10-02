@@ -4,34 +4,7 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-01T13:27:21.799Z",
-  "count": 2,
-  "items": [
-    {
-      "Activity_ID": "ACT-0001",
-      "Activity_Date": "2026-11-15",
-      "Title": "Alumni–Student Interaction Session",
-      "Type": "Alumni Interaction",
-      "Description": "An interactive session connecting aerospace alumni with current students to discuss careers, industry expectations and professional development.",
-      "Venue": "VIT Bhopal University",
-      "Registration_URL": "https://example.com/register",
-      "Contact_Email": "studentaffairs@example.com",
-      "Status": "Published",
-      "Posted_Date": "2026-10-01",
-      "Last_Updated": "2026-10-01"
-    },
-    {
-      "Activity_ID": "ACT-0002",
-      "Activity_Date": "2026-12-05",
-      "Title": "Aerospace Career and Industry Connect",
-      "Type": "Industry Connect",
-      "Description": "A professional interaction featuring alumni experiences, aerospace industry insights and career opportunities for students.",
-      "Venue": "VIT Bhopal University",
-      "Registration_URL": "https://example.com/register",
-      "Contact_Email": "alumni@example.com",
-      "Status": "Published",
-      "Posted_Date": "2026-10-01",
-      "Last_Updated": "2026-10-01"
-    }
-  ]
+  "generatedAt": "2026-10-02T06:29:53.976Z",
+  "count": 0,
+  "items": []
 }
