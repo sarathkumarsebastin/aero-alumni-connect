@@ -4,11 +4,11 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-01T13:27:17.689Z",
+  "generatedAt": "2026-10-02T06:29:31.380Z",
   "count": 2,
   "items": [
     {
-      "Opportunity_ID": "OPP-0001",
+      "Opportunity_ID": "",
       "Title": "Aerospace Design Engineer",
       "Type": "Job",
       "Organization": "Example Aerospace Technologies",
@@ -23,7 +23,7 @@
       "Last_Updated": "2026-10-01"
     },
     {
-      "Opportunity_ID": "OPP-0002",
+      "Opportunity_ID": "",
       "Title": "Aerospace Research Internship",
       "Type": "Internship",
       "Organization": "Aerospace Research Centre",
