@@ -4,8 +4,8 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-02T10:52:43.026Z",
-  "count": 4,
+  "generatedAt": "2026-10-02T11:07:36.889Z",
+  "count": 5,
   "items": [
     {
       "Alumni_ID": "AAC-0001",
@@ -114,6 +114,33 @@
       "Entrepreneurship_Guidance": "No",
       "Department_Activities": "Yes",
       "Communication_Preference": "Email"
+    },
+    {
+      "Alumni_ID": "AAC-0003",
+      "Full_Name": "Agastin Ajith",
+      "Graduation_Year": "2022",
+      "Degree": "B.Tech Aerospace Engineering",
+      "Current_City": "Madurai",
+      "Current_Country": "India",
+      "LinkedIn_URL": "https://www.linkedin.com/in/dr-j-sarathkumar-sebastin-041162111/",
+      "Current_Status": "Faculty / Academic",
+      "Organization": "St. Mary's School, Madurai",
+      "Designation": "Teacher",
+      "Industry_Sector": "Maths",
+      "Technical_Expertise": "Maths",
+      "Higher_Studies": "Maths",
+      "Professional_Certifications": "Maths",
+      "Interested_Mentoring": "No",
+      "Guest_Lecture": "No",
+      "Internship_Support": "Yes",
+      "Placement_Support": "No",
+      "Project_Guidance": "No",
+      "Research_Collaboration": "Yes",
+      "Technical_Review": "No",
+      "Industry_Connect": "No",
+      "Entrepreneurship_Guidance": "Yes",
+      "Department_Activities": "No",
+      "Communication_Preference": "Phone"
     }
   ]
 }
