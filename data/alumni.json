@@ -4,7 +4,35 @@
   "university": "VIT Bhopal University",
   "school": "School of Mechanical Engineering (SMEC)",
   "department": "Department of Aerospace Engineering",
-  "generatedAt": "2026-10-03T15:00:38.635Z",
-  "count": 0,
-  "items": []
+  "generatedAt": "2026-10-03T15:00:48.622Z",
+  "count": 1,
+  "items": [
+    {
+      "Alumni_ID": "AAC-0001",
+      "Full_Name": "Priyanshu kumar pandey",
+      "Graduation_Year": "2026",
+      "Degree": "B.Tech Aerospace Engineering",
+      "Current_City": "Gurgaon",
+      "Current_Country": "India",
+      "LinkedIn_URL": "https://www.linkedin.com/me?trk=p_mwlite_feed-secondary_nav",
+      "Current_Status": "",
+      "Organization": "",
+      "Designation": "Quality executive",
+      "Industry_Sector": "SCM",
+      "Technical_Expertise": "",
+      "Higher_Studies": "",
+      "Professional_Certifications": "",
+      "Interested_Mentoring": "No",
+      "Guest_Lecture": "No",
+      "Internship_Support": "No",
+      "Placement_Support": "No",
+      "Project_Guidance": "No",
+      "Research_Collaboration": "No",
+      "Technical_Review": "No",
+      "Industry_Connect": "No",
+      "Entrepreneurship_Guidance": "No",
+      "Department_Activities": "Yes",
+      "Communication_Preference": "WhatsApp"
+    }
+  ]
 }
